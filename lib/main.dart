@@ -1,4 +1,5 @@
-import 'package:dazzle/view/homeview.dart';
+import 'package:dazzle/view/screen/homeview.dart';
+import 'package:dazzle/view/screen/wallpaper_view.dart';
 import 'package:flutter/material.dart';
 
 void main() {
@@ -16,7 +17,7 @@ class MyApp extends StatelessWidget {
       theme: ThemeData(
         primarySwatch: Colors.purple,
       ),
-      home: const HomeView(),
+      home: const WallpaperView(),
     );
   }
 }
