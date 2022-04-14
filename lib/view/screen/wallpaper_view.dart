@@ -77,7 +77,8 @@ class WallpaperView extends StatelessWidget {
                                       const Icon(Icons.file_download_outlined)),
                             ),
                             //Set AS button
-                            const SetAsButton(),
+                            SetAsButton(
+                                wallpaper: wallpaper, wallpaperController: c),
                             //Favorite button
                             CircleAvatar(
                               backgroundColor: Theme.of(context).primaryColor,

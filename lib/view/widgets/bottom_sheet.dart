@@ -1,3 +1,5 @@
+import 'package:dazzle/controller/wallpaper_controller.dart';
+import 'package:dazzle/model/wallpaper.dart';
 import 'package:dazzle/view/utils/helper/color_helper.dart';
 import 'package:dazzle/view/utils/helper/style_helper.dart';
 import 'package:flutter/material.dart';
@@ -5,8 +7,12 @@ import 'package:get/get_core/get_core.dart';
 import 'package:get/get_navigation/get_navigation.dart';
 
 class SetAsButton extends StatelessWidget {
-  const SetAsButton({
+  final Wallpaper wallpaper;
+  final WallpaperController wallpaperController;
+  SetAsButton({
     Key? key,
+    required this.wallpaper,
+    required this.wallpaperController,
   }) : super(key: key);
 
   @override
@@ -46,24 +52,40 @@ class SetAsButton extends StatelessWidget {
                           Get.back();
                         },
                       ),
+
+                      // Home Screen
                       ListTile(
                         leading: const Icon(Icons.home_filled),
-                        onTap: () {},
+                        onTap: () {
+                          wallpaperController
+                              .setHomeScreen(wallpaper.urls.regular);
+                          Get.back();
+                        },
                         title: const Text(
                           'Home Screen',
                           style: h1,
                         ),
                       ),
+                      // Lock Screen
                       ListTile(
                           leading: const Icon(Icons.lock_open),
-                          onTap: () {},
+                          onTap: () {
+                            wallpaperController
+                                .setLockScreen(wallpaper.urls.regular);
+                            Get.back();
+                          },
                           title: const Text(
                             'Lock Screen',
                             style: h1,
                           )),
+                      // Both Screen
                       ListTile(
                           leading: const Icon(Icons.screen_lock_portrait),
-                          onTap: () {},
+                          onTap: () {
+                            wallpaperController
+                                .setBothScreen(wallpaper.urls.regular);
+                            Get.back();
+                          },
                           title: const Text(
                             'Home & Lock Screen',
                             style: h1,
