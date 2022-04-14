@@ -1,5 +1,5 @@
 import 'package:dazzle/controller/home_controller.dart';
-import 'package:dazzle/model/wallpaper.dart';
+
 import 'package:dazzle/view/utils/helper/color_helper.dart';
 import 'package:dazzle/view/utils/helper/style_helper.dart';
 import 'package:flutter/material.dart';

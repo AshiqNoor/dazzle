@@ -1,8 +1,8 @@
+import 'package:dazzle/controller/wallpaper_controller.dart';
 import 'package:dazzle/model/wallpaper.dart';
-import 'package:dazzle/view/utils/helper/color_helper.dart';
-import 'package:dazzle/view/utils/helper/style_helper.dart';
-import 'package:dazzle/view/utils/share/Wallpaper_icon_button.dart';
-import 'package:dazzle/view/utils/share/bottom_sheet.dart';
+
+import 'package:dazzle/view/widgets/Wallpaper_icon_button.dart';
+import 'package:dazzle/view/widgets/bottom_sheet.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 
@@ -41,11 +41,13 @@ class WallpaperView extends StatelessWidget {
                     child: Row(
                       mainAxisAlignment: MainAxisAlignment.spaceBetween,
                       children: [
+                        //Back button
                         WallpaperIconButton(
                             onPressed: () {
                               Get.back();
                             },
                             icon: const Icon(Icons.arrow_back_ios)),
+                        //Option button
                         WallpaperIconButton(
                             onPressed: () {},
                             icon: const Icon(Icons.more_vert)),
@@ -57,32 +59,38 @@ class WallpaperView extends StatelessWidget {
                     margin: const EdgeInsets.only(bottom: 20),
                     width: MediaQuery.of(context).size.width,
                     height: 50,
-                    child: Row(
-                      mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                      children: [
-                        //Download
-                        CircleAvatar(
-                          backgroundColor: Theme.of(context).primaryColor,
-                          child: WallpaperIconButton(
-                              onPressed: () {
-                                Get.back();
-                              },
-                              icon: const Icon(Icons.file_download_outlined)),
-                        ),
-                        //Set AS
-                        const SetAsButton(),
-                        //Favorite
-                        CircleAvatar(
-                          backgroundColor: Theme.of(context).primaryColor,
-                          child: WallpaperIconButton(
-                              onPressed: () {
-                                Get.back();
-                              },
-                              icon: const Icon(
-                                Icons.favorite_border,
-                              )),
-                        ),
-                      ],
+                    child: GetBuilder<WallpaperController>(
+                      init: WallpaperController(),
+                      builder: (c) {
+                        return Row(
+                          mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                          children: [
+                            //Download button
+                            CircleAvatar(
+                              backgroundColor: Theme.of(context).primaryColor,
+                              child: WallpaperIconButton(
+                                  onPressed: () {
+                                    c.downloadWallpaper(wallpaper.urls.regular);
+                                  },
+                                  icon:
+                                      const Icon(Icons.file_download_outlined)),
+                            ),
+                            //Set AS button
+                            const SetAsButton(),
+                            //Favorite button
+                            CircleAvatar(
+                              backgroundColor: Theme.of(context).primaryColor,
+                              child: WallpaperIconButton(
+                                  onPressed: () {
+                                    // Get.back();
+                                  },
+                                  icon: const Icon(
+                                    Icons.favorite_border,
+                                  )),
+                            ),
+                          ],
+                        );
+                      },
                     )),
               ],
             ),
