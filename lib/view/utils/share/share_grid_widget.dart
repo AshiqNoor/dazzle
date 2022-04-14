@@ -1,5 +1,8 @@
 import 'package:dazzle/model/wallpaper.dart';
+import 'package:dazzle/view/screen/wallpaper_view.dart';
+import 'package:dazzle/view/utils/helper/color_helper.dart';
 import 'package:flutter/material.dart';
+import 'package:get/get.dart';
 
 class ShareGridWidget extends StatelessWidget {
   final List<Wallpaper> wallpaper;
@@ -22,16 +25,24 @@ class ShareGridWidget extends StatelessWidget {
         ),
         itemCount: wallpaper.length,
         itemBuilder: (context, index) {
-          return ClipRRect(
-            borderRadius: BorderRadius.circular(15),
-            child: Container(
-              decoration: BoxDecoration(
-                borderRadius: BorderRadius.circular(15),
-                color: Colors.pink,
-              ),
-              child: Image.network(
-                wallpaper[index].urls.small,
-                fit: BoxFit.cover,
+          return GestureDetector(
+            onTap: () {
+              Get.to(() => WallpaperView(wallpaper: wallpaper[index]));
+            },
+            child: ClipRRect(
+              borderRadius: BorderRadius.circular(3),
+              child: Container(
+                decoration: BoxDecoration(
+                  borderRadius: BorderRadius.circular(3),
+                  color: pinkcolor,
+                ),
+                child: Hero(
+                  tag: wallpaper[index].urls.regular,
+                  child: Image.network(
+                    wallpaper[index].urls.regular,
+                    fit: BoxFit.cover,
+                  ),
+                ),
               ),
             ),
           );

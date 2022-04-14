@@ -1,6 +1,6 @@
 import 'package:dazzle/view/screen/homeview.dart';
-import 'package:dazzle/view/screen/wallpaper_view.dart';
 import 'package:flutter/material.dart';
+import 'package:get/get_navigation/src/root/get_material_app.dart';
 
 void main() {
   runApp(const MyApp());
@@ -11,13 +11,13 @@ class MyApp extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return MaterialApp(
+    return GetMaterialApp(
       title: 'Dazzle App',
       debugShowCheckedModeBanner: false,
       theme: ThemeData(
         primarySwatch: Colors.purple,
       ),
-      home: const WallpaperView(),
+      home: const HomeView(),
     );
   }
 }

@@ -1,21 +1,31 @@
+import 'package:dazzle/model/wallpaper.dart';
 import 'package:dazzle/view/utils/helper/color_helper.dart';
 import 'package:dazzle/view/utils/helper/style_helper.dart';
+import 'package:dazzle/view/utils/share/Wallpaper_icon_button.dart';
+import 'package:dazzle/view/utils/share/bottom_sheet.dart';
 import 'package:flutter/material.dart';
+import 'package:get/get.dart';
 
 class WallpaperView extends StatelessWidget {
-  const WallpaperView({Key? key}) : super(key: key);
+  final Wallpaper wallpaper;
+  const WallpaperView({Key? key, required this.wallpaper}) : super(key: key);
 
   @override
   Widget build(BuildContext context) {
+    double _width = MediaQuery.of(context).size.width;
+    double _height = MediaQuery.of(context).size.height;
     return Scaffold(
       body: Stack(
         children: [
-          Container(
-            width: MediaQuery.of(context).size.width,
-            height: MediaQuery.of(context).size.height,
-            child: Image.network(
-              'https://images.unsplash.com/photo-1518791841217-8f162f1e1131?ixlib=rb-1.2.1&ixid=eyJhcHBfaWQiOjEyMDd9&auto=format&fit=crop&w=1050&q=80',
-              fit: BoxFit.cover,
+          SizedBox(
+            width: _width,
+            height: _height,
+            child: Hero(
+              tag: wallpaper.urls.regular,
+              child: Image.network(
+                wallpaper.urls.regular,
+                fit: BoxFit.cover,
+              ),
             ),
           ),
           SafeArea(
@@ -31,16 +41,14 @@ class WallpaperView extends StatelessWidget {
                     child: Row(
                       mainAxisAlignment: MainAxisAlignment.spaceBetween,
                       children: [
-                        IconButton(
-                          icon: const Icon(Icons.arrow_back_ios),
-                          onPressed: () {
-                            Navigator.pop(context);
-                          },
-                        ),
-                        IconButton(
-                          icon: const Icon(Icons.more_vert),
-                          onPressed: () {},
-                        ),
+                        WallpaperIconButton(
+                            onPressed: () {
+                              Get.back();
+                            },
+                            icon: const Icon(Icons.arrow_back_ios)),
+                        WallpaperIconButton(
+                            onPressed: () {},
+                            icon: const Icon(Icons.more_vert)),
                       ],
                     )),
                 //Bottom
@@ -53,54 +61,26 @@ class WallpaperView extends StatelessWidget {
                       mainAxisAlignment: MainAxisAlignment.spaceBetween,
                       children: [
                         //Download
-                        ClipRRect(
-                          borderRadius: BorderRadius.circular(100),
-                          child: Container(
-                            width: 50,
-                            height: 50,
-                            decoration: BoxDecoration(
-                              borderRadius: BorderRadius.circular(15),
-                              color: Colors.pink,
-                            ),
-                            child: const Icon(
-                              Icons.download,
-                              color: whitecolor,
-                            ),
-                          ),
+                        CircleAvatar(
+                          backgroundColor: Theme.of(context).primaryColor,
+                          child: WallpaperIconButton(
+                              onPressed: () {
+                                Get.back();
+                              },
+                              icon: const Icon(Icons.file_download_outlined)),
                         ),
                         //Set AS
-                        ClipRRect(
-                          borderRadius: BorderRadius.circular(30),
-                          child: Container(
-                            width: 170,
-                            height: 50,
-                            decoration: BoxDecoration(
-                              borderRadius: BorderRadius.circular(15),
-                              color: Colors.pink,
-                            ),
-                            child: const Center(
-                              child: Text(
-                                "SET AS",
-                                style: buttons,
-                              ),
-                            ),
-                          ),
-                        ),
+                        const SetAsButton(),
                         //Favorite
-                        ClipRRect(
-                          borderRadius: BorderRadius.circular(100),
-                          child: Container(
-                            width: 50,
-                            height: 50,
-                            decoration: BoxDecoration(
-                              borderRadius: BorderRadius.circular(15),
-                              color: Colors.pink,
-                            ),
-                            child: const Icon(
-                              Icons.favorite_border,
-                              color: whitecolor,
-                            ),
-                          ),
+                        CircleAvatar(
+                          backgroundColor: Theme.of(context).primaryColor,
+                          child: WallpaperIconButton(
+                              onPressed: () {
+                                Get.back();
+                              },
+                              icon: const Icon(
+                                Icons.favorite_border,
+                              )),
                         ),
                       ],
                     )),
