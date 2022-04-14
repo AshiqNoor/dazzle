@@ -2,6 +2,7 @@ import 'package:dazzle/controller/wallpaper_controller.dart';
 import 'package:dazzle/model/wallpaper.dart';
 
 import 'package:dazzle/view/widgets/Wallpaper_icon_button.dart';
+
 import 'package:dazzle/view/widgets/bottom_sheet.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';

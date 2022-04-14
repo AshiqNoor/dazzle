@@ -18,7 +18,7 @@ class ShareGridWidget extends StatelessWidget {
       child: GridView.builder(
         physics: const BouncingScrollPhysics(),
         gridDelegate: const SliverGridDelegateWithFixedCrossAxisCount(
-          crossAxisCount: 2,
+          crossAxisCount: 3,
           mainAxisSpacing: 15,
           crossAxisSpacing: 15,
           childAspectRatio: 2 / 3.2,

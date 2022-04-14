@@ -1,8 +1,12 @@
 import 'package:dazzle/view/screen/homeview.dart';
+import 'package:dazzle/view/utils/constant/const.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get_navigation/src/root/get_material_app.dart';
+import 'package:hive_flutter/adapters.dart';
 
-void main() {
+Future<void> main() async {
+  await Hive.initFlutter();
+  await Hive.openBox<String>(downloadBox);
   runApp(const MyApp());
 }
 
