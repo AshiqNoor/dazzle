@@ -3,8 +3,8 @@ import 'package:dazzle/view/utils/constant/const.dart';
 import 'package:hive_flutter/hive_flutter.dart';
 
 class DownloadController extends BaseControlle {
-  Future<void> getimagepath({String? url, String? path}) async {
-    var box = await Hive.openBox<String>(downloadBox);
+  getimagepath({String? url, String? path}) {
+    var box = Hive.box<String>(downloadHiveBox);
     box.put(url, path!);
     box.close();
   }

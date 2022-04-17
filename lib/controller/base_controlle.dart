@@ -7,4 +7,10 @@ class BaseControlle extends GetxController {
     _state = value;
     update();
   }
+
+  int currentIndex = 0;
+  void setCurrentIndex(int val) {
+    currentIndex = val;
+    update();
+  }
 }

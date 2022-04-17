@@ -2,6 +2,7 @@ import 'package:dazzle/controller/home_controller.dart';
 
 import 'package:dazzle/view/utils/helper/color_helper.dart';
 import 'package:dazzle/view/utils/helper/style_helper.dart';
+import 'package:dazzle/view/widgets/bottom_navigation.dart';
 import 'package:flutter/material.dart';
 import 'package:dazzle/view/utils/share/share_grid_widget.dart';
 import 'package:get/get.dart';
@@ -66,24 +67,6 @@ class HomeView extends StatelessWidget {
             );
           },
         ),
-        // bottomNavigationBar: const TabBar(
-        //     indicatorColor: Colors.transparent,
-        //     labelColor: Colors.blue,
-        //     unselectedLabelColor: greyColor,
-        //     tabs: [
-        //       Tab(
-        //         icon: Icon(Icons.home),
-        //         child: Text('Home', style: links),
-        //       ),
-        //       Tab(
-        //         icon: Icon(Icons.search),
-        //         child: Text('Today', style: links),
-        //       ),
-        //       Tab(
-        //         icon: Icon(Icons.favorite),
-        //         child: Text('Today', style: links),
-        //       ),
-        //     ]),
       ),
     );
   }

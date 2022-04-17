@@ -1,12 +1,20 @@
+import 'package:dazzle/model/urls.dart';
+import 'package:dazzle/model/wallpaper.dart';
+import 'package:dazzle/view/screen/fav_view.dart';
 import 'package:dazzle/view/screen/homeview.dart';
 import 'package:dazzle/view/utils/constant/const.dart';
+import 'package:dazzle/view/widgets/bottom_navigation.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get_navigation/src/root/get_material_app.dart';
 import 'package:hive_flutter/adapters.dart';
 
 Future<void> main() async {
   await Hive.initFlutter();
-  await Hive.openBox<String>(downloadBox);
+  Hive.registerAdapter(UrlsAdapter());
+  Hive.registerAdapter(WallpaperAdapter());
+  await Hive.openBox<Wallpaper>(favoriteHiveBox);
+  await Hive.openBox<String>(downloadHiveBox);
+
   runApp(const MyApp());
 }
 
@@ -21,7 +29,7 @@ class MyApp extends StatelessWidget {
       theme: ThemeData(
         primarySwatch: Colors.purple,
       ),
-      home: const HomeView(),
+      home: const BaseView(),
     );
   }
 }
