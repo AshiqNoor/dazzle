@@ -3,7 +3,7 @@ import 'package:dazzle/model/wallpaper.dart';
 import 'package:dazzle/view/screen/fav_view.dart';
 import 'package:dazzle/view/screen/homeview.dart';
 import 'package:dazzle/view/utils/constant/const.dart';
-import 'package:dazzle/view/widgets/bottom_navigation.dart';
+import 'package:dazzle/view/widgets/base_view.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get_navigation/src/root/get_material_app.dart';
 import 'package:hive_flutter/adapters.dart';

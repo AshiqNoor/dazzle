@@ -1,3 +1,4 @@
+import 'package:dazzle/controller/favorite_controller.dart';
 import 'package:dazzle/controller/wallpaper_controller.dart';
 import 'package:dazzle/model/wallpaper.dart';
 
@@ -80,15 +81,28 @@ class WallpaperView extends StatelessWidget {
                             SetAsButton(
                                 wallpaper: wallpaper, wallpaperController: c),
                             //Favorite button
-                            CircleAvatar(
-                              backgroundColor: Theme.of(context).primaryColor,
-                              child: WallpaperIconButton(
-                                  onPressed: () {
-                                    // Get.back();
-                                  },
-                                  icon: const Icon(
-                                    Icons.favorite_border,
-                                  )),
+                            GetBuilder<FavoriteController>(
+                              init: FavoriteController(),
+                              initState: (con) {
+                                Future.delayed(const Duration(seconds: 0))
+                                    .then((value) {
+                                  con.controller!
+                                      .inlist(wallpaper.urls.regular);
+                                });
+                              },
+                              builder: (c) {
+                                return CircleAvatar(
+                                  backgroundColor:
+                                      Theme.of(context).primaryColor,
+                                  child: WallpaperIconButton(
+                                      onPressed: () {
+                                        c.favtoggole(wallpaper);
+                                      },
+                                      icon: c.isfav
+                                          ? const Icon(Icons.favorite)
+                                          : const Icon(Icons.favorite_border)),
+                                );
+                              },
                             ),
                           ],
                         );

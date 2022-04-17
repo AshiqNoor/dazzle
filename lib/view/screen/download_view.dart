@@ -17,7 +17,7 @@ class DownloadView extends StatelessWidget {
         backgroundColor: whitecolor,
         elevation: 0,
       ),
-      body: const Center(child: Text("Empty List")),
+      body: const Center(child: Text("Empty")),
     );
   }
 }

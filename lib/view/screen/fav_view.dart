@@ -49,7 +49,8 @@ class FavView extends StatelessWidget {
                             ),
                             itemCount: keys.length,
                             itemBuilder: (context, index) {
-                              final Wallpaper? wallpaper = box.get(keys[index]);
+                              final String key = keys[index];
+                              final Wallpaper? wallpaper = box.get(key);
                               return GestureDetector(
                                 onTap: () {
                                   Get.to(() =>
