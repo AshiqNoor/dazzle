@@ -1,8 +1,10 @@
 import 'package:dazzle/controller/home_controller.dart';
+import 'package:dazzle/controller/oldest_controller.dart';
+import 'package:dazzle/controller/popular_controller.dart';
 
 import 'package:dazzle/view/utils/helper/color_helper.dart';
 import 'package:dazzle/view/utils/helper/style_helper.dart';
-import 'package:dazzle/view/widgets/base_view.dart';
+
 import 'package:flutter/material.dart';
 import 'package:dazzle/view/utils/share/share_grid_widget.dart';
 import 'package:get/get.dart';
@@ -41,31 +43,45 @@ class HomeView extends StatelessWidget {
             ],
           ),
         ),
-        body: GetBuilder<HomeController>(
-          init: HomeController(),
-          //initState: (_) {},
-          builder: (c) {
-            return TabBarView(
-              physics: const BouncingScrollPhysics(),
-              children: [
-                c.state
-                    ? const Center(child: CircularProgressIndicator())
-                    : ShareGridWidget(
-                        wallpaper: c.todaylist,
-                      ),
-                c.state
-                    ? const Center(child: CircularProgressIndicator())
-                    : ShareGridWidget(
-                        wallpaper: c.popularlist,
-                      ),
-                c.state
-                    ? const Center(child: CircularProgressIndicator())
-                    : ShareGridWidget(
-                        wallpaper: c.oldestlist,
-                      ),
-              ],
-            );
-          },
+        body: TabBarView(
+          physics: const BouncingScrollPhysics(),
+          children: [
+            // Today
+            GetBuilder<HomeController>(
+                init: HomeController(),
+                builder: (c) {
+                  return c.state
+                      ? const Center(child: CircularProgressIndicator())
+                      : ShareGridWidget(
+                          wallpaper: c.todaylist,
+                          scrollController: c.todaycontroller,
+                          isLoading: c.isloading,
+                        );
+                }),
+            // Popular
+            GetBuilder<PopularController>(
+                init: PopularController(),
+                builder: (c) {
+                  return c.state
+                      ? const Center(child: CircularProgressIndicator())
+                      : ShareGridWidget(
+                          wallpaper: c.popularlist,
+                          scrollController: c.popularcontroller,
+                          isLoading: c.isloading,
+                        );
+                }),
+            // Oldest
+            GetBuilder<OldestController>(
+                init: OldestController(),
+                builder: (c) {
+                  return c.state
+                      ? const Center(child: CircularProgressIndicator())
+                      : ShareGridWidget(
+                          wallpaper: c.oldestlist,
+                          scrollController: c.oldestcontroller,
+                          isLoading: c.isloading);
+                }),
+          ],
         ),
       ),
     );

@@ -1,6 +1,5 @@
 import 'package:dazzle/controller/base_controlle.dart';
 import 'package:dazzle/view/utils/constant/const.dart';
-import 'package:get/get_connect/http/src/utils/utils.dart';
 import 'package:hive/hive.dart';
 
 import '../model/wallpaper.dart';

@@ -1,7 +1,5 @@
 import 'package:dazzle/model/urls.dart';
 import 'package:dazzle/model/wallpaper.dart';
-import 'package:dazzle/view/screen/fav_view.dart';
-import 'package:dazzle/view/screen/homeview.dart';
 import 'package:dazzle/view/utils/constant/const.dart';
 import 'package:dazzle/view/widgets/base_view.dart';
 import 'package:flutter/material.dart';
