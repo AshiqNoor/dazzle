@@ -1,9 +1,10 @@
-import 'package:dazzle/controller/home_controller.dart';
+import 'package:dazzle/controller/today_controller.dart';
 import 'package:dazzle/controller/oldest_controller.dart';
 import 'package:dazzle/controller/popular_controller.dart';
 
 import 'package:dazzle/view/utils/helper/color_helper.dart';
 import 'package:dazzle/view/utils/helper/style_helper.dart';
+import 'package:dazzle/view/utils/share/progress_indicator.dart';
 
 import 'package:flutter/material.dart';
 import 'package:dazzle/view/utils/share/share_grid_widget.dart';
@@ -24,7 +25,7 @@ class HomeView extends StatelessWidget {
           ),
           centerTitle: true,
           backgroundColor: whitecolor,
-          elevation: 0,
+          elevation: 1,
           actions: [
             IconButton(
               icon: const Icon(Icons.search),
@@ -32,11 +33,11 @@ class HomeView extends StatelessWidget {
               onPressed: () {},
             ),
           ],
-          bottom: const TabBar(
+          bottom: TabBar(
             indicatorColor: Colors.transparent,
-            labelColor: Colors.blue,
+            labelColor: Theme.of(context).primaryColor,
             unselectedLabelColor: greyColor,
-            tabs: [
+            tabs: const [
               Tab(child: Text('Today', style: links)),
               Tab(child: Text('Popular', style: links)),
               Tab(child: Text('Oldest', style: links)),
@@ -47,11 +48,11 @@ class HomeView extends StatelessWidget {
           physics: const BouncingScrollPhysics(),
           children: [
             // Today
-            GetBuilder<HomeController>(
-                init: HomeController(),
+            GetBuilder<TodayController>(
+                init: TodayController(),
                 builder: (c) {
                   return c.state
-                      ? const Center(child: CircularProgressIndicator())
+                      ? const Center(child: MidProgIndicator())
                       : ShareGridWidget(
                           wallpaper: c.todaylist,
                           scrollController: c.todaycontroller,
@@ -63,7 +64,7 @@ class HomeView extends StatelessWidget {
                 init: PopularController(),
                 builder: (c) {
                   return c.state
-                      ? const Center(child: CircularProgressIndicator())
+                      ? const Center(child: MidProgIndicator())
                       : ShareGridWidget(
                           wallpaper: c.popularlist,
                           scrollController: c.popularcontroller,
@@ -75,7 +76,7 @@ class HomeView extends StatelessWidget {
                 init: OldestController(),
                 builder: (c) {
                   return c.state
-                      ? const Center(child: CircularProgressIndicator())
+                      ? const Center(child: MidProgIndicator())
                       : ShareGridWidget(
                           wallpaper: c.oldestlist,
                           scrollController: c.oldestcontroller,

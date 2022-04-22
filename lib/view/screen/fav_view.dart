@@ -22,11 +22,11 @@ class FavView extends StatelessWidget {
           ),
           centerTitle: true,
           backgroundColor: whitecolor,
-          elevation: 0,
+          elevation: 1,
         ),
         body: Container(
           color: whitecolor,
-          padding: const EdgeInsets.all(20),
+          padding: const EdgeInsets.all(10),
           child: GetBuilder<FavoriteController>(
             init: FavoriteController(),
             builder: (c) {
@@ -41,9 +41,9 @@ class FavView extends StatelessWidget {
                             gridDelegate:
                                 const SliverGridDelegateWithFixedCrossAxisCount(
                               crossAxisCount: 2,
-                              mainAxisSpacing: 15,
-                              crossAxisSpacing: 15,
-                              childAspectRatio: 2 / 3.2,
+                              mainAxisSpacing: 12,
+                              crossAxisSpacing: 12,
+                              childAspectRatio: 2 / 3.03,
                             ),
                             itemCount: keys.length,
                             itemBuilder: (context, index) {
@@ -51,14 +51,16 @@ class FavView extends StatelessWidget {
                               final Wallpaper? wallpaper = box.get(key);
                               return GestureDetector(
                                 onTap: () {
-                                  Get.to(() =>
-                                      WallpaperView(wallpaper: wallpaper!));
+                                  Get.to(() => WallpaperView(
+                                        wallpaper: wallpaper!,
+                                        isdownload: false,
+                                      ));
                                 },
                                 child: ClipRRect(
-                                  borderRadius: BorderRadius.circular(3),
+                                  borderRadius: BorderRadius.circular(7),
                                   child: Container(
                                     decoration: BoxDecoration(
-                                      borderRadius: BorderRadius.circular(3),
+                                      borderRadius: BorderRadius.circular(7),
                                       color: pinkcolor,
                                     ),
                                     child: Hero(

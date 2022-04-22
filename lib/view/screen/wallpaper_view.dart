@@ -1,16 +1,23 @@
+import 'dart:io';
+
 import 'package:dazzle/controller/favorite_controller.dart';
 import 'package:dazzle/controller/wallpaper_controller.dart';
+import 'package:dazzle/model/result.dart';
 import 'package:dazzle/model/wallpaper.dart';
-
-import 'package:dazzle/view/widgets/Wallpaper_icon_button.dart';
-
+import 'package:dazzle/view/widgets/bottom_icon.dart';
 import 'package:dazzle/view/widgets/bottom_sheet.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 
 class WallpaperView extends StatelessWidget {
-  final Wallpaper wallpaper;
-  const WallpaperView({Key? key, required this.wallpaper}) : super(key: key);
+  final Wallpaper? wallpaper;
+  // final bool isSearch;
+  final bool isdownload;
+  const WallpaperView({
+    Key? key,
+    this.wallpaper,
+    required this.isdownload,
+  }) : super(key: key);
 
   @override
   Widget build(BuildContext context) {
@@ -19,17 +26,29 @@ class WallpaperView extends StatelessWidget {
     return Scaffold(
       body: Stack(
         children: [
-          SizedBox(
-            width: _width,
-            height: _height,
-            child: Hero(
-              tag: wallpaper.urls.regular,
-              child: Image.network(
-                wallpaper.urls.regular,
-                fit: BoxFit.cover,
-              ),
-            ),
-          ),
+          isdownload
+              ? SizedBox(
+                  width: _width,
+                  height: _height,
+                  child: Hero(
+                    tag: wallpaper!.urls.regular,
+                    child: Image.file(
+                      File(wallpaper!.urls.regular),
+                      fit: BoxFit.cover,
+                    ),
+                  ),
+                )
+              : SizedBox(
+                  width: _width,
+                  height: _height,
+                  child: Hero(
+                    tag: wallpaper!.urls.regular,
+                    child: Image.network(
+                      wallpaper!.urls.regular,
+                      fit: BoxFit.cover,
+                    ),
+                  ),
+                ),
           SafeArea(
             child: Column(
               crossAxisAlignment: CrossAxisAlignment.start,
@@ -44,13 +63,13 @@ class WallpaperView extends StatelessWidget {
                       mainAxisAlignment: MainAxisAlignment.spaceBetween,
                       children: [
                         //Back button
-                        WallpaperIconButton(
+                        BottomIconButton(
                             onPressed: () {
                               Get.back();
                             },
                             icon: const Icon(Icons.arrow_back_ios)),
                         //Option button
-                        WallpaperIconButton(
+                        BottomIconButton(
                             onPressed: () {},
                             icon: const Icon(Icons.more_vert)),
                       ],
@@ -68,42 +87,52 @@ class WallpaperView extends StatelessWidget {
                           mainAxisAlignment: MainAxisAlignment.spaceBetween,
                           children: [
                             //Download button
-                            CircleAvatar(
-                              backgroundColor: Theme.of(context).primaryColor,
-                              child: WallpaperIconButton(
-                                  onPressed: () {
-                                    c.downloadWallpaper(wallpaper.urls.regular);
-                                  },
-                                  icon:
-                                      const Icon(Icons.file_download_outlined)),
-                            ),
+                            isdownload
+                                ? Container()
+                                : CircleAvatar(
+                                    backgroundColor:
+                                        Theme.of(context).primaryColor,
+                                    child: BottomIconButton(
+                                        onPressed: () {
+                                          c.downloadWallpaper(
+                                              wallpaper!.urls.regular);
+                                        },
+                                        icon: const Icon(
+                                            Icons.file_download_outlined)),
+                                  ),
                             //Set AS button
                             SetAsButton(
-                                wallpaper: wallpaper, wallpaperController: c),
-                            //Favorite button
-                            GetBuilder<FavoriteController>(
-                              init: FavoriteController(),
-                              initState: (con) {
-                                Future.delayed(const Duration(seconds: 0))
-                                    .then((value) {
-                                  con.controller!
-                                      .inlist(wallpaper.urls.regular);
-                                });
-                              },
-                              builder: (c) {
-                                return CircleAvatar(
-                                  backgroundColor:
-                                      Theme.of(context).primaryColor,
-                                  child: WallpaperIconButton(
-                                      onPressed: () {
-                                        c.favtoggole(wallpaper);
-                                      },
-                                      icon: c.isfav
-                                          ? const Icon(Icons.favorite)
-                                          : const Icon(Icons.favorite_border)),
-                                );
-                              },
+                              wallpaper: wallpaper!,
+                              wallpaperController: c,
+                              isdownload: isdownload,
                             ),
+                            //Favorite button
+                            isdownload
+                                ? Container()
+                                : GetBuilder<FavoriteController>(
+                                    init: FavoriteController(),
+                                    initState: (con) {
+                                      Future.delayed(const Duration(seconds: 0))
+                                          .then((value) {
+                                        con.controller!
+                                            .inlist(wallpaper!.urls.regular);
+                                      });
+                                    },
+                                    builder: (c) {
+                                      return CircleAvatar(
+                                        backgroundColor:
+                                            Theme.of(context).primaryColor,
+                                        child: BottomIconButton(
+                                            onPressed: () {
+                                              c.favtoggole(wallpaper!);
+                                            },
+                                            icon: c.isfav
+                                                ? const Icon(Icons.favorite)
+                                                : const Icon(
+                                                    Icons.favorite_border)),
+                                      );
+                                    },
+                                  ),
                           ],
                         );
                       },

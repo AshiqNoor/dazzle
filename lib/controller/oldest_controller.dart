@@ -12,7 +12,7 @@ class OldestController extends BaseControlle {
   Future<void> getListofOldest() async {
     setstate(true);
     oldestlist =
-        await _restobj.convertJsonToObject(api + "&page=${1}&order_by=oldest");
+        await _restobj.convertJsonToObject(api + order + old + page + '${1}');
     setstate(false);
   }
 
@@ -28,7 +28,7 @@ class OldestController extends BaseControlle {
   Future<void> adddataoldestlist() async {
     setLoading(true);
     oldestlist.addAll(await _restobj
-        .convertJsonToObject(api + "&page=$oldestpage&order_by=oldest"));
+        .convertJsonToObject(api + order + latest + '$page $oldestpage'));
     oldestpage++;
     setLoading(false);
     update();
@@ -41,5 +41,11 @@ class OldestController extends BaseControlle {
     {
       super.onInit();
     }
+  }
+
+  @override
+  void onClose() {
+    oldestcontroller.dispose();
+    super.onClose();
   }
 }

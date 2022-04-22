@@ -11,8 +11,8 @@ class PopularController extends BaseControlle {
   int popularpage = 2;
   Future<void> getListofPopular() async {
     setstate(true);
-    popularlist =
-        await _restobj.convertJsonToObject(api + "&page=${1}&order_by=popular");
+    popularlist = await _restobj
+        .convertJsonToObject(api + order + popular + page + '${1}');
     setstate(false);
   }
 
@@ -28,7 +28,7 @@ class PopularController extends BaseControlle {
   Future<void> adddatapopularlist() async {
     setLoading(true);
     popularlist.addAll(await _restobj
-        .convertJsonToObject(api + "&page=$popularpage&order_by=popular"));
+        .convertJsonToObject(api + order + latest + '$page $popularpage'));
     popularpage++;
     setLoading(false);
     update();
@@ -41,5 +41,11 @@ class PopularController extends BaseControlle {
     {
       super.onInit();
     }
+  }
+
+  @override
+  void onClose() {
+    popularcontroller.dispose();
+    super.onClose();
   }
 }

@@ -15,9 +15,10 @@ class FavoriteController extends BaseControlle {
 
   void addFavorite(Wallpaper data) {
     Wallpaper wallpaper = Wallpaper(
-        description: data.description,
-        altDescription: data.altDescription,
-        urls: data.urls);
+      description: data.description,
+      altDescription: data.altDescription,
+      urls: data.urls,
+    );
     favbox!.put(wallpaper.urls.regular, wallpaper);
   }
 

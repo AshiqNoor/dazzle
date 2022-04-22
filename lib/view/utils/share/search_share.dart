@@ -1,15 +1,13 @@
-import 'package:dazzle/model/wallpaper.dart';
-import 'package:dazzle/view/screen/wallpaper_view.dart';
+import 'package:dazzle/model/result.dart';
 import 'package:dazzle/view/utils/helper/color_helper.dart';
 import 'package:dazzle/view/utils/share/progress_indicator.dart';
 import 'package:flutter/material.dart';
-import 'package:get/get.dart';
 
-class ShareGridWidget extends StatelessWidget {
-  final List<Wallpaper> wallpaper;
+class ShareGridWidget1 extends StatelessWidget {
+  final List<Result> wallpaper;
   final ScrollController scrollController;
   final bool isLoading;
-  const ShareGridWidget({
+  ShareGridWidget1({
     Key? key,
     required this.wallpaper,
     required this.scrollController,
@@ -36,10 +34,10 @@ class ShareGridWidget extends StatelessWidget {
             itemBuilder: (context, index) {
               return GestureDetector(
                 onTap: () {
-                  Get.to(() => WallpaperView(
-                        wallpaper: wallpaper[index],
-                        isdownload: false,
-                      ));
+                  // Get.to(() => WallpaperView(
+                  //       wallpaper: wall[index],
+                  //       isdownload: false,
+                  //     ));
                 },
                 child: ClipRRect(
                   borderRadius: BorderRadius.circular(7),

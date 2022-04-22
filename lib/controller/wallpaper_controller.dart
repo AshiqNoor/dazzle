@@ -7,12 +7,14 @@ import 'package:get/get.dart';
 
 class WallpaperController extends DownloadController {
   Future<void> downloadWallpaper(String url) async {
+    // Get the file from the url
     var file = await DefaultCacheManager().getSingleFile(url);
+    //save the file and url to the Hive or database
     getimagepath(url: url, path: file.path);
     Get.showSnackbar(
       const GetSnackBar(
-        title: 'Download Success',
-        message: 'Image Downloaded',
+        title: success,
+        message: message,
         duration: Duration(seconds: 2),
       ),
     );
@@ -23,18 +25,36 @@ class WallpaperController extends DownloadController {
     return file;
   }
 
-  Future<void> setScreen(String url, String name) async {
-    var filepath = await cacheWallpaper(url);
-    switch (name) {
-      case homeScreen:
-        await setHomeScreen(filepath.path);
-        break;
-      case lockScreen:
-        await setLockScreen(filepath.path);
-        break;
-      case bothScreen:
-        await setBothScreen(filepath.path);
-        break;
+  Future<void> setScreen(
+      {String? url, String? name, String? imgpath, bool? download}) async {
+    //if i came from download page only need imagepath
+    if (download!) {
+      switch (name) {
+        case homeScreen:
+          await setHomeScreen(imgpath!);
+          break;
+        case lockScreen:
+          await setLockScreen(imgpath!);
+          break;
+        case bothScreen:
+          await setBothScreen(imgpath!);
+          break;
+      }
+    }
+    //if i came from homepage or fevorite page only need url
+    else {
+      var filepath = await cacheWallpaper(url!);
+      switch (name) {
+        case homeScreen:
+          await setHomeScreen(filepath.path);
+          break;
+        case lockScreen:
+          await setLockScreen(filepath.path);
+          break;
+        case bothScreen:
+          await setBothScreen(filepath.path);
+          break;
+      }
     }
   }
 
@@ -45,8 +65,8 @@ class WallpaperController extends DownloadController {
           path, WallpaperManager.HOME_SCREEN);
       Get.showSnackbar(
         const GetSnackBar(
-          title: 'Done',
-          message: 'Apply on Home Screen',
+          title: done,
+          message: homemesasge,
           duration: Duration(seconds: 2),
         ),
       );
@@ -62,8 +82,8 @@ class WallpaperController extends DownloadController {
           path, WallpaperManager.LOCK_SCREEN);
       Get.showSnackbar(
         const GetSnackBar(
-          title: 'Done',
-          message: 'Apply on Lock Screen',
+          title: done,
+          message: lockmessage,
           duration: Duration(seconds: 2),
         ),
       );
@@ -79,8 +99,8 @@ class WallpaperController extends DownloadController {
           path, WallpaperManager.BOTH_SCREEN);
       Get.showSnackbar(
         const GetSnackBar(
-          title: 'Done',
-          message: 'Apply on Both Screen',
+          title: done,
+          message: bothmessage,
           duration: Duration(seconds: 2),
         ),
       );

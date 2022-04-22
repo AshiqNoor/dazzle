@@ -4,15 +4,15 @@ import 'package:dazzle/services/rest_api.dart';
 import 'package:dazzle/view/utils/constant/const.dart';
 import 'package:flutter/cupertino.dart';
 
-class HomeController extends BaseControlle {
+class TodayController extends BaseControlle {
   final _restobj = RestApi();
   final ScrollController todaycontroller = ScrollController();
   List<Wallpaper> todaylist = [];
   int todaypage = 2;
   Future<void> getListofToday() async {
     setstate(true);
-    todaylist =
-        await _restobj.convertJsonToObject(api + "&page=${1}&order_by=latest");
+    todaylist = await _restobj
+        .convertJsonToObject(api + order + latest + page + '${1}');
     setstate(false);
   }
 
@@ -28,7 +28,7 @@ class HomeController extends BaseControlle {
   Future<void> adddatatodaylist() async {
     setLoading(true);
     todaylist.addAll(await _restobj
-        .convertJsonToObject(api + "&page=$todaypage&order_by=latest"));
+        .convertJsonToObject(api + order + latest + '$page $todaypage'));
     todaypage++;
     setLoading(false);
     update();
@@ -41,5 +41,11 @@ class HomeController extends BaseControlle {
     {
       super.onInit();
     }
+  }
+
+  @override
+  void onClose() {
+    todaycontroller.dispose();
+    super.onClose();
   }
 }

@@ -10,11 +10,13 @@ import 'package:get/get_navigation/get_navigation.dart';
 
 class SetAsButton extends StatelessWidget {
   final Wallpaper wallpaper;
+  final bool isdownload;
   final WallpaperController wallpaperController;
   SetAsButton({
     Key? key,
     required this.wallpaper,
     required this.wallpaperController,
+    required this.isdownload,
   }) : super(key: key);
 
   final List<BottomList> bottomSheetName = [
@@ -56,7 +58,10 @@ class SetAsButton extends StatelessWidget {
                         ),
                         onTap: () {
                           wallpaperController.setScreen(
-                              wallpaper.urls.regular, val.name);
+                              url: wallpaper.urls.regular,
+                              name: val.name,
+                              imgpath: wallpaper.urls.regular,
+                              download: isdownload);
                           Get.back();
                         },
                       );

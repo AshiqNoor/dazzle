@@ -3,9 +3,16 @@ import 'package:dazzle/view/utils/constant/const.dart';
 import 'package:hive_flutter/hive_flutter.dart';
 
 class DownloadController extends BaseControlle {
-  getimagepath({String? url, String? path}) {
+  Box<String>? downloadbox;
+//save the url and file path of the wallpaper to the HIve box
+  void getimagepath({String? url, String? path}) {
     var box = Hive.box<String>(downloadHiveBox);
     box.put(url, path!);
-    box.close();
+  }
+
+  @override
+  void onInit() {
+    downloadbox = Hive.box<String>(downloadHiveBox);
+    super.onInit();
   }
 }
