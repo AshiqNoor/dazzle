@@ -7,13 +7,14 @@ import '../model/wallpaper.dart';
 class FavoriteController extends BaseControlle {
   Box<Wallpaper>? favbox;
   bool isfav = false;
+  //bool isSearch = false;
   @override
   void onInit() {
     favbox = Hive.box<Wallpaper>(favoriteHiveBox);
     super.onInit();
   }
 
-  void addFavorite(Wallpaper data) {
+  void addFavorite(var data) {
     Wallpaper wallpaper = Wallpaper(
       description: data.description,
       altDescription: data.altDescription,
@@ -36,7 +37,7 @@ class FavoriteController extends BaseControlle {
     update();
   }
 
-  void favtoggole(Wallpaper data) {
+  void favtoggole(var data) {
     isfav = !isfav;
     if (isfav) {
       addFavorite(data);

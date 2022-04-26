@@ -1,6 +1,8 @@
 import 'package:dazzle/controller/base_controlle.dart';
 import 'package:dazzle/view/screen/homeview.dart';
 import 'package:dazzle/view/screen/search_view.dart';
+import 'package:dazzle/view/utils/constant/const.dart';
+import 'package:dazzle/view/utils/helper/color_helper.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:google_nav_bar/google_nav_bar.dart';
@@ -20,11 +22,11 @@ class BaseView extends StatelessWidget {
           body: getWidgetByIndex(c.currentIndex),
           bottomNavigationBar: Container(
             decoration: BoxDecoration(
-              color: Colors.white,
+              color: whiteCOLOR,
               boxShadow: [
                 BoxShadow(
                   blurRadius: 20,
-                  color: Colors.black.withOpacity(.1),
+                  color: blackCOLOR.withOpacity(.1),
                 )
               ],
             ),
@@ -34,11 +36,11 @@ class BaseView extends StatelessWidget {
                       const EdgeInsets.symmetric(horizontal: 15.0, vertical: 8),
                   child: GNav(
                       //tabBorderRadius: 20,
-                      rippleColor: Colors.blue[300]!,
-                      hoverColor: Colors.blue,
+                      rippleColor: lightBlueCOLOR,
+                      hoverColor: blueCOLOR,
                       gap: 8,
-                      activeColor: Colors.white,
-                      iconSize: 20,
+                      activeColor: whiteCOLOR,
+                      iconSize: 25,
                       padding: const EdgeInsets.symmetric(
                           horizontal: 12, vertical: 8),
                       duration: const Duration(milliseconds: 400),
@@ -46,30 +48,37 @@ class BaseView extends StatelessWidget {
                       tabs: const [
                         GButton(
                             icon: Icons.home_outlined,
-                            text: 'Home',
+                            text: homeText,
+                            //textColor: Colors.white,
+                            textStyle: TextStyle(
+                                fontSize: 20,
+                                color: whiteCOLOR,
+                                fontWeight: FontWeight.w600),
                             backgroundGradient: LinearGradient(
-                              colors: [
-                                Color.fromARGB(255, 148, 231, 225),
-                                Color.fromARGB(255, 62, 182, 226)
-                              ],
+                              colors: [lightCyanCOLOR, lightBlueCOLOR],
                             )),
                         GButton(
                           icon: Icons.download_outlined,
-                          text: 'Download',
+                          text: downloadText,
+                          textStyle: TextStyle(
+                              fontSize: 20,
+                              color: whiteCOLOR,
+                              fontWeight: FontWeight.w600),
                           backgroundGradient: LinearGradient(
-                            colors: [
-                              Color.fromARGB(255, 148, 231, 225),
-                              Color.fromARGB(255, 62, 182, 226)
-                            ],
+                            colors: [lightCyanCOLOR, lightBlueCOLOR],
                           ),
                         ),
                         GButton(
                           icon: Icons.favorite_outline,
-                          text: 'Favorite',
+                          text: favoriteText,
+                          textStyle: TextStyle(
+                              fontSize: 20,
+                              color: whiteCOLOR,
+                              fontWeight: FontWeight.w600),
                           backgroundGradient: LinearGradient(
                             colors: [
-                              Color.fromARGB(255, 148, 231, 225),
-                              Color.fromARGB(255, 62, 182, 226)
+                              lightCyanCOLOR,
+                              lightBlueCOLOR
                               //   Color.fromARGB(255, 148, 231, 199),
                               // Color.fromARGB(255, 62, 226, 212)
                             ],
@@ -77,12 +86,13 @@ class BaseView extends StatelessWidget {
                         ),
                         GButton(
                           icon: Icons.search_outlined,
-                          text: 'Search',
+                          text: searchText,
+                          textStyle: TextStyle(
+                              fontSize: 20,
+                              color: whiteCOLOR,
+                              fontWeight: FontWeight.w600),
                           backgroundGradient: LinearGradient(
-                            colors: [
-                              Color.fromARGB(255, 148, 231, 225),
-                              Color.fromARGB(255, 62, 182, 226)
-                            ],
+                            colors: [lightCyanCOLOR, lightBlueCOLOR],
                           ),
                         ),
                       ],

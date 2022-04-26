@@ -8,9 +8,9 @@ class Urls {
     required this.small,
   });
   @HiveField(20)
-  final String regular;
+  String regular;
   @HiveField(21)
-  final String small;
+  String small;
 
   factory Urls.fromJson(Map<String, dynamic> json) => Urls(
         regular: json["regular"],

@@ -1,32 +1,27 @@
 import 'package:dazzle/model/urls.dart';
+import 'package:hive/hive.dart';
+part 'result.g.dart';
 
-class Data {
-  List<Result> results;
-
-  Data({required this.results});
-
-  factory Data.fromJson(Map<String, dynamic> json) => Data(
-      results:
-          List<Result>.from(json["results"].map((x) => Result.fromJson(x))));
-
-  Map<String, dynamic> toJson() =>
-      {"results": List<dynamic>.from(results.map((x) => x.toJson()))};
-}
-
+@HiveType(typeId: 35)
 class Result {
-  final String description;
-  final String altDescription;
+  @HiveField(35)
+  String description;
+  @HiveField(36)
+  String altDescription;
+  @HiveField(37)
   Urls urls;
 
-  Result(
-      {required this.description,
-      required this.altDescription,
-      required this.urls});
+  Result({
+    required this.urls,
+    required this.description,
+    required this.altDescription,
+  });
 
   factory Result.fromJson(Map<String, dynamic> json) => Result(
-      description: json["description"] ?? "",
-      altDescription: json["alt_description"] ?? "",
-      urls: Urls.fromJson(json["urls"]));
+        description: json["description"] ?? "",
+        altDescription: json["alt_description"] ?? "",
+        urls: Urls.fromJson(json["urls"]),
+      );
 
   Map<String, dynamic> toJson() => {
         "description": description,

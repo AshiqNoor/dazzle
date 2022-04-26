@@ -1,6 +1,3 @@
-import 'dart:convert';
-import 'package:dazzle/model/wallpaper.dart';
-import 'package:http/http.dart' as http;
 import 'package:dazzle/controller/base_controlle.dart';
 import 'package:dazzle/model/result.dart';
 import 'package:dazzle/services/search_api.dart';

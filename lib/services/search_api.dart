@@ -2,24 +2,33 @@ import 'dart:convert';
 import 'package:dazzle/model/result.dart';
 import 'package:http/http.dart' as http;
 
+import '../model/data.dart';
+
 class SearchApi {
-  Future<dynamic> fetchData(url) async {
+  // ignore: prefer_typing_uninitialized_variables
+  var parsejson;
+  Future<dynamic> getjsonFromApi(url) async {
     var uri = Uri.parse(url);
     final response = await http.get(uri);
-    // var url =
-    //     'https://unsplash.com/napi/search/photos?query=$keyword&xp=&per_page=50&page=1';
-    // var responseApi = await http.get(Uri.parse(url));
+    try {
+      if (response.statusCode == 200) {
+        parsejson = jsonDecode(response.body) as dynamic;
 
-    var resJSON = json.decode(response.body);
-    var data = Data.fromJson(resJSON);
-
-    return data;
+        //print(parsejson);
+      } else {
+        //  print('Request failed with status: ${response.statusCode}.');
+      }
+    } catch (e) {
+      // print(e);
+    }
+    return parsejson;
   }
 
   Future<List<Result>> convertsearchJsonToObject(String url) async {
-    var list = (await fetchData(url)).results;
+    var list = (await getjsonFromApi(url));
+    var data = Data.fromJson(list);
     List<Result> results = [];
-    results = list;
+    results = data.results;
 
     return results;
   }

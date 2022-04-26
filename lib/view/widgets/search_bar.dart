@@ -1,3 +1,5 @@
+import 'package:dazzle/view/utils/constant/const.dart';
+import 'package:dazzle/view/utils/helper/color_helper.dart';
 import 'package:flutter/material.dart';
 import 'package:dazzle/controller/search_controller.dart';
 import 'package:get/get.dart';
@@ -30,11 +32,11 @@ class SearchBar extends StatelessWidget {
                   onSubmitted: onSubmit,
                   decoration: const InputDecoration(
                     floatingLabelBehavior: FloatingLabelBehavior.never,
-                    hintText: "Search",
+                    hintText: searchText,
                     prefixIcon: Icon(
                       Icons.search,
                       size: 25,
-                      color: Colors.grey,
+                      color: blackgreyCOLOR,
                     ),
                     border: InputBorder.none,
                   ));
@@ -42,10 +44,10 @@ class SearchBar extends StatelessWidget {
           )),
       decoration: BoxDecoration(
         borderRadius: BorderRadius.circular(30),
-        color: Colors.white,
+        color: whiteCOLOR,
         boxShadow: [
           BoxShadow(
-            color: Colors.black.withOpacity(0.1),
+            color: blackCOLOR.withOpacity(0.1),
             spreadRadius: 2,
             blurRadius: 20,
             offset: const Offset(0, 5), // changes position of shadow

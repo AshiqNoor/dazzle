@@ -26,7 +26,11 @@ class WallpaperController extends DownloadController {
   }
 
   Future<void> setScreen(
-      {String? url, String? name, String? imgpath, bool? download}) async {
+      {String? url,
+      String? name,
+      String? imgpath,
+      bool? download,
+      bool? search}) async {
     //if i came from download page only need imagepath
     if (download!) {
       switch (name) {

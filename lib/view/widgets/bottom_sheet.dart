@@ -8,15 +8,21 @@ import 'package:flutter/material.dart';
 import 'package:get/get_core/get_core.dart';
 import 'package:get/get_navigation/get_navigation.dart';
 
+import '../../model/result.dart';
+
 class SetAsButton extends StatelessWidget {
-  final Wallpaper wallpaper;
+  final Wallpaper? wallpaper;
+  final Result? wallpaper1;
+  final bool? isSearch;
   final bool isdownload;
   final WallpaperController wallpaperController;
   SetAsButton({
     Key? key,
-    required this.wallpaper,
+    this.wallpaper,
     required this.wallpaperController,
     required this.isdownload,
+    this.isSearch,
+    this.wallpaper1,
   }) : super(key: key);
 
   final List<BottomList> bottomSheetName = [
@@ -44,7 +50,7 @@ class SetAsButton extends StatelessWidget {
       ),
       onTap: () {
         showBottomSheet(
-            backgroundColor: Colors.transparent,
+            backgroundColor: transparentCOLOR,
             context: context,
             builder: (context) => Container(
                   child: ListView(
@@ -58,9 +64,13 @@ class SetAsButton extends StatelessWidget {
                         ),
                         onTap: () {
                           wallpaperController.setScreen(
-                              url: wallpaper.urls.regular,
+                              url: isSearch!
+                                  ? wallpaper1!.urls.regular
+                                  : wallpaper!.urls.regular,
                               name: val.name,
-                              imgpath: wallpaper.urls.regular,
+                              imgpath: isSearch!
+                                  ? wallpaper1!.urls.regular
+                                  : wallpaper!.urls.regular,
                               download: isdownload);
                           Get.back();
                         },
@@ -69,7 +79,7 @@ class SetAsButton extends StatelessWidget {
                   ),
                   height: Get.height * 0.32,
                   decoration: const BoxDecoration(
-                    color: whitecolor,
+                    color: whiteCOLOR,
                     borderRadius: BorderRadius.only(
                       topLeft: Radius.circular(10),
                       topRight: Radius.circular(10),

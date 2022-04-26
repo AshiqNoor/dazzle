@@ -9,7 +9,7 @@ class BottomIconButton extends StatelessWidget {
   const BottomIconButton(
       {Key? key,
       required this.onPressed,
-      this.color = whitecolor,
+      this.color = whiteCOLOR,
       required this.icon})
       : super(key: key);
 

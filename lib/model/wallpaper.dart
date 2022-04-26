@@ -1,4 +1,3 @@
-import 'package:dazzle/model/result.dart';
 import 'package:dazzle/model/urls.dart';
 import 'package:hive_flutter/adapters.dart';
 part 'wallpaper.g.dart';

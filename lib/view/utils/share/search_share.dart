@@ -1,13 +1,17 @@
 import 'package:dazzle/model/result.dart';
-import 'package:dazzle/view/utils/helper/color_helper.dart';
+import 'package:dazzle/view/utils/constant/const.dart';
 import 'package:dazzle/view/utils/share/progress_indicator.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter_staggered_grid_view/flutter_staggered_grid_view.dart';
+import 'package:get/get.dart';
+
+import '../../screen/wallpaper_view.dart';
 
 class ShareGridWidget1 extends StatelessWidget {
   final List<Result> wallpaper;
   final ScrollController scrollController;
   final bool isLoading;
-  ShareGridWidget1({
+  const ShareGridWidget1({
     Key? key,
     required this.wallpaper,
     required this.scrollController,
@@ -21,36 +25,38 @@ class ShareGridWidget1 extends StatelessWidget {
       child: Stack(
         alignment: Alignment.bottomCenter,
         children: [
-          GridView.builder(
+          StaggeredGridView.countBuilder(
             controller: scrollController,
             physics: const BouncingScrollPhysics(),
-            gridDelegate: const SliverGridDelegateWithFixedCrossAxisCount(
-              crossAxisCount: 2,
-              mainAxisSpacing: 12,
-              crossAxisSpacing: 12,
-              childAspectRatio: 2 / 3.03,
-            ),
+            crossAxisCount: 4,
+            staggeredTileBuilder: (i) =>
+                StaggeredTile.count(2, i.isOdd ? 2 : 3),
+            mainAxisSpacing: 8,
+            crossAxisSpacing: 8,
             itemCount: wallpaper.length,
             itemBuilder: (context, index) {
-              return GestureDetector(
-                onTap: () {
-                  // Get.to(() => WallpaperView(
-                  //       wallpaper: wall[index],
-                  //       isdownload: false,
-                  //     ));
-                },
-                child: ClipRRect(
-                  borderRadius: BorderRadius.circular(7),
-                  child: Container(
-                    decoration: BoxDecoration(
-                      borderRadius: BorderRadius.circular(7),
-                      color: pinkcolor,
-                    ),
+              String imgpath = wallpaper[index].urls.regular;
+              return Material(
+                elevation: 5,
+                borderRadius: const BorderRadius.all(Radius.circular(7)),
+                child: GestureDetector(
+                  onTap: () {
+                    Get.to(() => WallpaperView(
+                          wallpaper1: wallpaper[index],
+                          isdownload: false,
+                          isSearch: true,
+                        ));
+                  },
+                  child: ClipRRect(
+                    borderRadius: BorderRadius.circular(7),
                     child: Hero(
-                      tag: wallpaper[index].urls.regular,
-                      child: Image.network(
-                        wallpaper[index].urls.regular,
+                      tag: imgpath,
+                      child: FadeInImage(
+                        image: NetworkImage(
+                          imgpath,
+                        ),
                         fit: BoxFit.cover,
+                        placeholder: const AssetImage(assetTransparen),
                       ),
                     ),
                   ),

@@ -11,12 +11,15 @@ import 'package:get/get.dart';
 
 class WallpaperView extends StatelessWidget {
   final Wallpaper? wallpaper;
-  // final bool isSearch;
+  final Result? wallpaper1;
+  final bool? isSearch;
   final bool isdownload;
   const WallpaperView({
     Key? key,
     this.wallpaper,
+    this.wallpaper1,
     required this.isdownload,
+    this.isSearch = false,
   }) : super(key: key);
 
   @override
@@ -26,29 +29,40 @@ class WallpaperView extends StatelessWidget {
     return Scaffold(
       body: Stack(
         children: [
-          isdownload
-              ? SizedBox(
-                  width: _width,
-                  height: _height,
-                  child: Hero(
-                    tag: wallpaper!.urls.regular,
-                    child: Image.file(
+          SizedBox(
+            width: _width,
+            height: _height,
+            child: Hero(
+              tag: isSearch!
+                  ? wallpaper1!.urls.regular
+                  : wallpaper!.urls.regular,
+              child: isdownload
+                  ? Image.file(
                       File(wallpaper!.urls.regular),
                       fit: BoxFit.cover,
-                    ),
-                  ),
-                )
-              : SizedBox(
-                  width: _width,
-                  height: _height,
-                  child: Hero(
-                    tag: wallpaper!.urls.regular,
-                    child: Image.network(
-                      wallpaper!.urls.regular,
-                      fit: BoxFit.cover,
-                    ),
-                  ),
-                ),
+                    )
+                  : isSearch!
+                      ? Image.network(
+                          wallpaper1!.urls.regular,
+                          fit: BoxFit.cover,
+                        )
+                      : Image.network(
+                          wallpaper!.urls.regular,
+                          fit: BoxFit.cover,
+                        ),
+            ),
+          ),
+          // : SizedBox(
+          //     width: _width,
+          //     height: _height,
+          //     child: Hero(
+          //       tag: wallpaper!.urls.regular,
+          //       child: Image.network(
+          //         wallpaper!.urls.regular,
+          //         fit: BoxFit.cover,
+          //       ),
+          //     ),
+          //   ),
           SafeArea(
             child: Column(
               crossAxisAlignment: CrossAxisAlignment.start,
@@ -94,19 +108,31 @@ class WallpaperView extends StatelessWidget {
                                         Theme.of(context).primaryColor,
                                     child: BottomIconButton(
                                         onPressed: () {
-                                          c.downloadWallpaper(
-                                              wallpaper!.urls.regular);
+                                          c.downloadWallpaper(isSearch!
+                                              ? wallpaper1!.urls.regular
+                                              : wallpaper!.urls.regular);
                                         },
                                         icon: const Icon(
                                             Icons.file_download_outlined)),
                                   ),
                             //Set AS button
+                            // isSearch!
+                            //     ?
                             SetAsButton(
-                              wallpaper: wallpaper!,
+                              wallpaper1: isSearch! ? wallpaper1 : null,
+                              wallpaper: isSearch! ? null : wallpaper,
                               wallpaperController: c,
                               isdownload: isdownload,
-                            ),
+                              isSearch: isSearch! ? true : false,
+                            )
+                            // : SetAsButton(
+                            //     wallpaper: wallpaper,
+                            //     wallpaperController: c,
+                            //     isdownload: isdownload,
+                            //     isSearch: isSearch! ? true : false,
+                            //   ),
                             //Favorite button
+                            ,
                             isdownload
                                 ? Container()
                                 : GetBuilder<FavoriteController>(
@@ -114,8 +140,9 @@ class WallpaperView extends StatelessWidget {
                                     initState: (con) {
                                       Future.delayed(const Duration(seconds: 0))
                                           .then((value) {
-                                        con.controller!
-                                            .inlist(wallpaper!.urls.regular);
+                                        con.controller!.inlist(isSearch!
+                                            ? wallpaper1!.urls.regular
+                                            : wallpaper!.urls.regular);
                                       });
                                     },
                                     builder: (c) {
@@ -124,7 +151,9 @@ class WallpaperView extends StatelessWidget {
                                             Theme.of(context).primaryColor,
                                         child: BottomIconButton(
                                             onPressed: () {
-                                              c.favtoggole(wallpaper!);
+                                              c.favtoggole(isSearch!
+                                                  ? wallpaper1!
+                                                  : wallpaper!);
                                             },
                                             icon: c.isfav
                                                 ? const Icon(Icons.favorite)

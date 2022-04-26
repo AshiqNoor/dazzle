@@ -13,37 +13,22 @@ import 'package:loading_indicator/loading_indicator.dart';
 // ];
 
 class ProgIndicator extends StatelessWidget {
+  final Indicator? indicator;
   const ProgIndicator({
     Key? key,
+    this.indicator = Indicator.lineSpinFadeLoader,
   }) : super(key: key);
 
   @override
   Widget build(BuildContext context) {
-    return const Padding(
-      padding: EdgeInsets.only(bottom: 7),
+    return Padding(
+      padding: const EdgeInsets.only(bottom: 7),
       child: CircleAvatar(
-        backgroundColor: Colors.transparent,
+        backgroundColor: transparentCOLOR,
         child: LoadingIndicator(
-          indicatorType: Indicator.lineSpinFadeLoader,
-          colors: rainbowColors,
+          indicatorType: indicator!,
+          colors: rainbowCOLORS,
         ),
-      ),
-    );
-  }
-}
-
-class MidProgIndicator extends StatelessWidget {
-  const MidProgIndicator({
-    Key? key,
-  }) : super(key: key);
-
-  @override
-  Widget build(BuildContext context) {
-    return const CircleAvatar(
-      backgroundColor: Colors.transparent,
-      child: LoadingIndicator(
-        indicatorType: Indicator.ballSpinFadeLoader,
-        colors: rainbowColors,
       ),
     );
   }

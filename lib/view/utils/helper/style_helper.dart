@@ -1,13 +1,14 @@
+import 'package:dazzle/view/utils/constant/const.dart';
 import 'package:flutter/material.dart';
 
 import 'color_helper.dart';
 
 const h1 = TextStyle(
-  color: blackcolor,
+  color: blackCOLOR,
   fontWeight: FontWeight.bold,
 );
 const title1 = TextStyle(
-  color: blackcolor,
+  color: blackCOLOR,
   fontSize: 23,
   fontWeight: FontWeight.bold,
 );
@@ -17,7 +18,7 @@ const links = TextStyle(
 );
 
 const buttons = TextStyle(
-  color: whitecolor,
+  color: whiteCOLOR,
   fontWeight: FontWeight.bold,
-  fontFamily: 'Ubuntu',
+  fontFamily: fontFamily,
 );
