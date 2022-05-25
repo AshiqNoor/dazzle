@@ -12,8 +12,8 @@ import 'package:get/get.dart';
 import 'package:hive_flutter/adapters.dart';
 
 class FavView extends StatelessWidget {
-  const FavView({Key? key}) : super(key: key);
-
+  const FavView({Key? key, required this.isConnectivity}) : super(key: key);
+  final bool isConnectivity;
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -23,8 +23,8 @@ class FavView extends StatelessWidget {
             style: title1,
           ),
           centerTitle: true,
-          backgroundColor: whiteCOLOR,
-          elevation: 1,
+          backgroundColor: topbotomColor,
+          elevation: elevationNo,
         ),
         body: Container(
           color: whiteCOLOR,
@@ -32,51 +32,62 @@ class FavView extends StatelessWidget {
           child: GetBuilder<FavoriteController>(
             init: FavoriteController(),
             builder: (c) {
-              return ValueListenableBuilder(
-                  valueListenable: c.favbox!.listenable(),
-                  builder: (context, Box<Wallpaper> box, child) {
-                    final List<String> keys = box.keys.cast<String>().toList();
-                    return keys.isEmpty
-                        ? const Center(child: Text(emptyText))
-                        : StaggeredGridView.countBuilder(
-                            physics: const BouncingScrollPhysics(),
-                            crossAxisCount: 4,
-                            staggeredTileBuilder: (i) =>
-                                StaggeredTile.count(2, i.isEven ? 2.2 : 3),
-                            mainAxisSpacing: 8,
-                            crossAxisSpacing: 8,
-                            itemCount: keys.length,
-                            itemBuilder: (context, index) {
-                              final String key = keys[index];
-                              final Wallpaper? wallpaper = box.get(key);
-                              return Material(
-                                  elevation: 5,
-                                  borderRadius: const BorderRadius.all(
-                                      Radius.circular(7)),
-                                  child: GestureDetector(
-                                      onTap: () {
-                                        Get.to(() => WallpaperView(
-                                              wallpaper: wallpaper!,
-                                              isdownload: false,
-                                            ));
-                                      },
-                                      child: ClipRRect(
-                                        borderRadius: BorderRadius.circular(7),
-                                        child: Hero(
-                                          tag: wallpaper!.urls.regular,
-                                          child: FadeInImage(
-                                            image: NetworkImage(
-                                              wallpaper.urls.regular,
+              return isConnectivity
+                  ? ValueListenableBuilder(
+                      valueListenable: c.favbox!.listenable(),
+                      builder: (context, Box<Wallpaper> box, child) {
+                        final List<String> keys =
+                            box.keys.cast<String>().toList();
+                        return keys.isEmpty
+                            ? const Center(child: Text(emptyText))
+                            : StaggeredGridView.countBuilder(
+                                physics: const BouncingScrollPhysics(),
+                                crossAxisCount: 4,
+                                staggeredTileBuilder: (i) =>
+                                    StaggeredTile.count(2, i.isEven ? 2.2 : 3),
+                                mainAxisSpacing: 8,
+                                crossAxisSpacing: 8,
+                                itemCount: keys.length,
+                                itemBuilder: (context, index) {
+                                  final String key = keys[index];
+                                  final Wallpaper? wallpaper = box.get(key);
+                                  return Material(
+                                      elevation: 5,
+                                      borderRadius: const BorderRadius.all(
+                                          Radius.circular(7)),
+                                      child: GestureDetector(
+                                          onTap: () {
+                                            Get.to(() => WallpaperView(
+                                                  wallpaper: wallpaper!,
+                                                  isdownload: false,
+                                                ));
+                                          },
+                                          child: ClipRRect(
+                                            borderRadius:
+                                                BorderRadius.circular(7),
+                                            child: Hero(
+                                              tag: wallpaper!.urls.regular,
+                                              child: FadeInImage(
+                                                image: NetworkImage(
+                                                  wallpaper.urls.regular,
+                                                ),
+                                                fit: BoxFit.cover,
+                                                placeholder: const AssetImage(
+                                                    assetTransparen),
+                                              ),
                                             ),
-                                            fit: BoxFit.cover,
-                                            placeholder: const AssetImage(
-                                                assetTransparen),
-                                          ),
-                                        ),
-                                      )));
-                            },
-                          );
-                  });
+                                          )));
+                                },
+                              );
+                      })
+                  : const Center(
+                      child: Text(
+                      "No Internet Connection",
+                      style: TextStyle(
+                        fontSize: 20,
+                        color: greyCOLOR,
+                      ),
+                    ));
             },
           ),
         ));

@@ -5,9 +5,9 @@ import 'package:http/http.dart' as http;
 class RestApi {
   var parsejson = [];
   Future<List<dynamic>> getjsonFromApi(String url) async {
-    var uri = Uri.parse(url);
-    final response = await http.get(uri);
     try {
+      var uri = Uri.parse(url);
+      final response = await http.get(uri);
       if (response.statusCode == 200) {
         parsejson = jsonDecode(response.body) as List<dynamic>;
 
@@ -30,8 +30,12 @@ class RestApi {
   Future<List<Wallpaper>> convertJsonToObject(String url) async {
     List<dynamic> list = (await getjsonFromApi(url));
     List<Wallpaper> wallpapers = [];
-    for (var wallpaper in list) {
-      wallpapers.add(Wallpaper.fromJson(wallpaper));
+    try {
+      for (var wallpaper in list) {
+        wallpapers.add(Wallpaper.fromJson(wallpaper));
+      }
+    } catch (e) {
+      // print(e);
     }
     return wallpapers;
   }

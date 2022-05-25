@@ -10,28 +10,40 @@ class TodayController extends BaseControlle {
   List<Wallpaper> todaylist = [];
   int todaypage = 2;
   Future<void> getListofToday() async {
-    setstate(true);
-    todaylist = await _restobj
-        .convertJsonToObject(api + order + latest + page + '${1}');
-    setstate(false);
+    try {
+      setstate(true);
+      todaylist = await _restobj
+          .convertJsonToObject(api + order + latest + page + '${1}');
+      setstate(false);
+    } catch (e) {
+      //print(e);
+    }
   }
 
   void loadmoredata() {
-    todaycontroller.addListener(() async {
-      if (todaycontroller.position.pixels ==
-          todaycontroller.position.maxScrollExtent) {
-        await adddatatodaylist();
-      }
-    });
+    try {
+      todaycontroller.addListener(() async {
+        if (todaycontroller.position.pixels ==
+            todaycontroller.position.maxScrollExtent) {
+          await adddatatodaylist();
+        }
+      });
+    } catch (e) {
+      //print(e);
+    }
   }
 
   Future<void> adddatatodaylist() async {
-    setLoading(true);
-    todaylist.addAll(await _restobj
-        .convertJsonToObject(api + order + latest + '$page $todaypage'));
-    todaypage++;
-    setLoading(false);
-    update();
+    try {
+      setLoading(true);
+      todaylist.addAll(await _restobj
+          .convertJsonToObject(api + order + latest + '$page $todaypage'));
+      todaypage++;
+      setLoading(false);
+      update();
+    } catch (e) {
+      //print(e);
+    }
   }
 
   @override
@@ -43,9 +55,9 @@ class TodayController extends BaseControlle {
     }
   }
 
-  @override
-  void onClose() {
-    todaycontroller.dispose();
-    super.onClose();
-  }
+  // @override
+  // void onClose() {
+  //   todaycontroller.dispose();
+  //   super.onClose();
+  // }
 }

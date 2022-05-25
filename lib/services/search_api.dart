@@ -8,9 +8,10 @@ class SearchApi {
   // ignore: prefer_typing_uninitialized_variables
   var parsejson;
   Future<dynamic> getjsonFromApi(url) async {
-    var uri = Uri.parse(url);
-    final response = await http.get(uri);
     try {
+      var uri = Uri.parse(url);
+      final response = await http.get(uri);
+
       if (response.statusCode == 200) {
         parsejson = jsonDecode(response.body) as dynamic;
 

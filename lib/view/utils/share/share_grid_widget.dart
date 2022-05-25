@@ -1,3 +1,4 @@
+import 'package:dazzle/controller/base_controlle.dart';
 import 'package:dazzle/model/result.dart';
 import 'package:dazzle/model/wallpaper.dart';
 import 'package:dazzle/view/screen/wallpaper_view.dart';
@@ -24,56 +25,62 @@ class ShareGridWidget extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return Padding(
-      padding: const EdgeInsets.only(top: 10, left: 10, right: 10, bottom: 0),
-      child: Stack(
-        alignment: Alignment.bottomCenter,
-        children: [
-          StaggeredGridView.countBuilder(
-            controller: scrollController,
-            physics: const BouncingScrollPhysics(),
-            crossAxisCount: 4,
-            staggeredTileBuilder: (i) =>
-                StaggeredTile.count(2, i.isOdd ? 2 : 3),
-            mainAxisSpacing: 8,
-            crossAxisSpacing: 8,
-            itemCount: isSearch! ? wallpaper1!.length : wallpaper!.length,
-            itemBuilder: (context, index) {
-              String imgpath = isSearch!
-                  ? wallpaper1![index].urls.regular
-                  : wallpaper![index].urls.regular;
-              return Material(
-                elevation: 5,
-                borderRadius: const BorderRadius.all(Radius.circular(7)),
-                child: GestureDetector(
-                  onTap: () {
-                    Get.to(() => WallpaperView(
-                          wallpaper1: isSearch! ? wallpaper1![index] : null,
-                          wallpaper: isSearch! ? null : wallpaper![index],
-                          isdownload: false,
-                          isSearch: isSearch!,
-                        ));
-                  },
-                  child: ClipRRect(
-                    borderRadius: BorderRadius.circular(7),
-                    child: Hero(
-                      tag: imgpath,
-                      child: FadeInImage(
-                        image: NetworkImage(
-                          imgpath,
+    return GetBuilder<BaseControlle>(
+      init: BaseControlle(),
+      builder: (c) {
+        return Padding(
+          padding:
+              const EdgeInsets.only(top: 10, left: 10, right: 10, bottom: 0),
+          child: Stack(
+            alignment: Alignment.bottomCenter,
+            children: [
+              StaggeredGridView.countBuilder(
+                controller: scrollController,
+                physics: const BouncingScrollPhysics(),
+                crossAxisCount: 4,
+                staggeredTileBuilder: (i) =>
+                    StaggeredTile.count(2, i.isOdd ? 2 : 3),
+                mainAxisSpacing: 8,
+                crossAxisSpacing: 8,
+                itemCount: isSearch! ? wallpaper1!.length : wallpaper!.length,
+                itemBuilder: (context, index) {
+                  String imgpath = isSearch!
+                      ? wallpaper1![index].urls.regular
+                      : wallpaper![index].urls.regular;
+                  return Material(
+                    elevation: 5,
+                    borderRadius: const BorderRadius.all(Radius.circular(7)),
+                    child: GestureDetector(
+                      onTap: () {
+                        Get.to(() => WallpaperView(
+                              wallpaper1: isSearch! ? wallpaper1![index] : null,
+                              wallpaper: isSearch! ? null : wallpaper![index],
+                              isdownload: false,
+                              isSearch: isSearch!,
+                            ));
+                      },
+                      child: ClipRRect(
+                        borderRadius: BorderRadius.circular(7),
+                        child: Hero(
+                          tag: imgpath,
+                          child: FadeInImage(
+                            image: NetworkImage(
+                              imgpath,
+                            ),
+                            fit: BoxFit.cover,
+                            placeholder: const AssetImage(assetTransparen),
+                          ),
                         ),
-                        fit: BoxFit.cover,
-                        placeholder: const AssetImage(assetTransparen),
                       ),
                     ),
-                  ),
-                ),
-              );
-            },
+                  );
+                },
+              ),
+              isLoading ? const ProgIndicator() : Container(),
+            ],
           ),
-          isLoading ? const ProgIndicator() : Container(),
-        ],
-      ),
+        );
+      },
     );
   }
 }

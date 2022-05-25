@@ -13,9 +13,9 @@ class WallpaperController extends DownloadController {
     getimagepath(url: url, path: file.path);
     Get.showSnackbar(
       const GetSnackBar(
-        title: success,
-        message: message,
-        duration: Duration(seconds: 2),
+        title: successMessage,
+        message: downloadedMessage,
+        duration: Duration(seconds: snakbarDuration),
       ),
     );
   }
@@ -69,9 +69,9 @@ class WallpaperController extends DownloadController {
           path, WallpaperManager.HOME_SCREEN);
       Get.showSnackbar(
         const GetSnackBar(
-          title: done,
-          message: homemesasge,
-          duration: Duration(seconds: 2),
+          title: doneMessage,
+          message: homeMessage,
+          duration: Duration(seconds: snakbarDuration),
         ),
       );
     } catch (e) {
@@ -86,9 +86,9 @@ class WallpaperController extends DownloadController {
           path, WallpaperManager.LOCK_SCREEN);
       Get.showSnackbar(
         const GetSnackBar(
-          title: done,
-          message: lockmessage,
-          duration: Duration(seconds: 2),
+          title: doneMessage,
+          message: lockMessage,
+          duration: Duration(seconds: snakbarDuration),
         ),
       );
     } catch (e) {
@@ -103,9 +103,9 @@ class WallpaperController extends DownloadController {
           path, WallpaperManager.BOTH_SCREEN);
       Get.showSnackbar(
         const GetSnackBar(
-          title: done,
-          message: bothmessage,
-          duration: Duration(seconds: 2),
+          title: doneMessage,
+          message: bothMessage,
+          duration: Duration(seconds: snakbarDuration),
         ),
       );
     } catch (e) {

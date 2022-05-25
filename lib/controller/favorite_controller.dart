@@ -15,35 +15,51 @@ class FavoriteController extends BaseControlle {
   }
 
   void addFavorite(var data) {
-    Wallpaper wallpaper = Wallpaper(
-      description: data.description,
-      altDescription: data.altDescription,
-      urls: data.urls,
-    );
-    favbox!.put(wallpaper.urls.regular, wallpaper);
+    try {
+      Wallpaper wallpaper = Wallpaper(
+        description: data.description,
+        altDescription: data.altDescription,
+        urls: data.urls,
+      );
+      favbox!.put(wallpaper.urls.regular, wallpaper);
+    } catch (e) {
+      //print(e);
+    }
   }
 
   void deleteFavorite(String key) {
-    favbox!.delete(key);
+    try {
+      favbox!.delete(key);
+    } catch (e) {
+      //print(e);
+    }
   }
 
   inlist(String key) {
-    var val = favbox!.get(key);
-    if (val == null) {
-      isfav = false;
-    } else {
-      isfav = true;
+    try {
+      var val = favbox!.get(key);
+      if (val == null) {
+        isfav = false;
+      } else {
+        isfav = true;
+      }
+      update();
+    } catch (e) {
+      //print(e);
     }
-    update();
   }
 
   void favtoggole(var data) {
-    isfav = !isfav;
-    if (isfav) {
-      addFavorite(data);
-    } else {
-      deleteFavorite(data.urls.regular);
+    try {
+      isfav = !isfav;
+      if (isfav) {
+        addFavorite(data);
+      } else {
+        deleteFavorite(data.urls.regular);
+      }
+      update();
+    } catch (e) {
+      //print(e);
     }
-    update();
   }
 }

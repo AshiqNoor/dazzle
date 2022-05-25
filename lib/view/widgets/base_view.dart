@@ -1,8 +1,9 @@
-import 'package:dazzle/controller/base_controlle.dart';
+import 'package:dazzle/controller/connectivity_controller.dart';
 import 'package:dazzle/view/screen/homeview.dart';
 import 'package:dazzle/view/screen/search_view.dart';
 import 'package:dazzle/view/utils/constant/const.dart';
 import 'package:dazzle/view/utils/helper/color_helper.dart';
+import 'package:dazzle/view/utils/helper/style_helper.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:google_nav_bar/google_nav_bar.dart';
@@ -14,15 +15,14 @@ class BaseView extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return GetBuilder<BaseControlle>(
-      init: BaseControlle(),
-      // initState: (_) {},
+    return GetBuilder<ConnectivityController>(
+      init: ConnectivityController(),
       builder: (c) {
         return Scaffold(
-          body: getWidgetByIndex(c.currentIndex),
+          body: getWidgetByIndex(c.currentIndex, c.isConnectivity),
           bottomNavigationBar: Container(
             decoration: BoxDecoration(
-              color: whiteCOLOR,
+              color: topbotomColor,
               boxShadow: [
                 BoxShadow(
                   blurRadius: 20,
@@ -35,71 +35,54 @@ class BaseView extends StatelessWidget {
                   padding:
                       const EdgeInsets.symmetric(horizontal: 15.0, vertical: 8),
                   child: GNav(
-                      //tabBorderRadius: 20,
-                      rippleColor: lightBlueCOLOR,
-                      hoverColor: blueCOLOR,
-                      gap: 8,
-                      activeColor: whiteCOLOR,
-                      iconSize: 25,
-                      padding: const EdgeInsets.symmetric(
-                          horizontal: 12, vertical: 8),
-                      duration: const Duration(milliseconds: 400),
-                      color: Theme.of(context).primaryColor,
-                      tabs: const [
-                        GButton(
-                            icon: Icons.home_outlined,
-                            text: homeText,
-                            //textColor: Colors.white,
-                            textStyle: TextStyle(
-                                fontSize: 20,
-                                color: whiteCOLOR,
-                                fontWeight: FontWeight.w600),
-                            backgroundGradient: LinearGradient(
-                              colors: [lightCyanCOLOR, lightBlueCOLOR],
-                            )),
-                        GButton(
-                          icon: Icons.download_outlined,
-                          text: downloadText,
-                          textStyle: TextStyle(
-                              fontSize: 20,
-                              color: whiteCOLOR,
-                              fontWeight: FontWeight.w600),
+                    selectedIndex: c.currentIndex,
+                    onTabChange: (val) {
+                      c.setCurrentIndex(val);
+                    },
+                    //tabBorderRadius: 20,
+                    rippleColor: lightBlueCOLOR,
+                    hoverColor: blueCOLOR,
+                    gap: 8,
+                    activeColor: whiteCOLOR,
+                    iconSize: 25,
+                    padding:
+                        const EdgeInsets.symmetric(horizontal: 12, vertical: 8),
+                    duration: const Duration(milliseconds: 400),
+                    color: Theme.of(context).primaryColor,
+                    tabs: const [
+                      GButton(
+                          icon: Icons.home_outlined,
+                          text: homeText,
+                          textStyle: navText,
                           backgroundGradient: LinearGradient(
                             colors: [lightCyanCOLOR, lightBlueCOLOR],
-                          ),
+                          )),
+                      GButton(
+                        icon: Icons.download_outlined,
+                        text: downloadText,
+                        textStyle: navText,
+                        backgroundGradient: LinearGradient(
+                          colors: [lightCyanCOLOR, lightBlueCOLOR],
                         ),
-                        GButton(
-                          icon: Icons.favorite_outline,
-                          text: favoriteText,
-                          textStyle: TextStyle(
-                              fontSize: 20,
-                              color: whiteCOLOR,
-                              fontWeight: FontWeight.w600),
-                          backgroundGradient: LinearGradient(
-                            colors: [
-                              lightCyanCOLOR,
-                              lightBlueCOLOR
-                              //   Color.fromARGB(255, 148, 231, 199),
-                              // Color.fromARGB(255, 62, 226, 212)
-                            ],
-                          ),
+                      ),
+                      GButton(
+                        icon: Icons.favorite_outline,
+                        text: favoriteText,
+                        textStyle: navText,
+                        backgroundGradient: LinearGradient(
+                          colors: [lightCyanCOLOR, lightBlueCOLOR],
                         ),
-                        GButton(
-                          icon: Icons.search_outlined,
-                          text: searchText,
-                          textStyle: TextStyle(
-                              fontSize: 20,
-                              color: whiteCOLOR,
-                              fontWeight: FontWeight.w600),
-                          backgroundGradient: LinearGradient(
-                            colors: [lightCyanCOLOR, lightBlueCOLOR],
-                          ),
+                      ),
+                      GButton(
+                        icon: Icons.search_outlined,
+                        text: searchText,
+                        textStyle: navText,
+                        backgroundGradient: LinearGradient(
+                          colors: [lightCyanCOLOR, lightBlueCOLOR],
                         ),
-                      ],
-                      selectedIndex: c.currentIndex,
-                      onTabChange: (val) {
-                        c.setCurrentIndex(val);
-                      })),
+                      ),
+                    ],
+                  )),
             ),
           ),
 
@@ -135,17 +118,17 @@ class BaseView extends StatelessWidget {
   }
 }
 
-Widget getWidgetByIndex(int index) {
+Widget getWidgetByIndex(int index, bool isConnectivity) {
   switch (index) {
     case 0:
-      return const HomeView();
+      return HomeView(isConnectivity: isConnectivity);
     case 1:
       return const DownloadView();
     case 2:
-      return const FavView();
+      return FavView(isConnectivity: isConnectivity);
     case 3:
-      return const SearchView();
+      return SearchView(isConnectivity: isConnectivity);
     default:
-      return const HomeView();
+      return HomeView(isConnectivity: isConnectivity);
   }
 }

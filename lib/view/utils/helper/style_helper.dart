@@ -8,15 +8,23 @@ const h1 = TextStyle(
   fontWeight: FontWeight.bold,
 );
 const title1 = TextStyle(
-  color: blackCOLOR,
-  fontSize: 23,
-  fontWeight: FontWeight.bold,
+  color: purpleCOLOR,
+  fontSize: 21,
+  fontWeight: FontWeight.w700,
+);
+const tabText = TextStyle(
+  fontSize: 21,
+  fontWeight: FontWeight.w700,
 );
 const links = TextStyle(
   fontSize: 16,
   fontWeight: FontWeight.w700,
 );
-
+const navText = TextStyle(
+  fontSize: 20,
+  color: whiteCOLOR,
+  fontWeight: FontWeight.w600,
+);
 const buttons = TextStyle(
   color: whiteCOLOR,
   fontWeight: FontWeight.bold,

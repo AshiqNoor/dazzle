@@ -25,8 +25,8 @@ class DownloadView extends StatelessWidget {
           ),
           // bottomOpacity: 5,
           centerTitle: true,
-          backgroundColor: whiteCOLOR,
-          elevation: 3,
+          backgroundColor: topbotomColor,
+          elevation: elevationNo,
         ),
         body: Container(
           color: whiteCOLOR,

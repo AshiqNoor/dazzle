@@ -6,8 +6,12 @@ class DownloadController extends BaseControlle {
   Box<String>? downloadbox;
 //save the url and file path of the wallpaper to the HIve box
   void getimagepath({String? url, String? path}) {
-    var box = Hive.box<String>(downloadHiveBox);
-    box.put(url, path!);
+    try {
+      var box = Hive.box<String>(downloadHiveBox);
+      box.put(url, path!);
+    } catch (e) {
+      //print(e);
+    }
   }
 
   @override

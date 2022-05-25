@@ -10,28 +10,40 @@ class OldestController extends BaseControlle {
   List<Wallpaper> oldestlist = [];
   int oldestpage = 2;
   Future<void> getListofOldest() async {
-    setstate(true);
-    oldestlist =
-        await _restobj.convertJsonToObject(api + order + old + page + '${1}');
-    setstate(false);
+    try {
+      setstate(true);
+      oldestlist =
+          await _restobj.convertJsonToObject(api + order + old + page + '${1}');
+      setstate(false);
+    } catch (e) {
+      //print(e);
+    }
   }
 
   void loadmoredata() {
-    oldestcontroller.addListener(() async {
-      if (oldestcontroller.position.pixels ==
-          oldestcontroller.position.maxScrollExtent) {
-        await adddataoldestlist();
-      }
-    });
+    try {
+      oldestcontroller.addListener(() async {
+        if (oldestcontroller.position.pixels ==
+            oldestcontroller.position.maxScrollExtent) {
+          await adddataoldestlist();
+        }
+      });
+    } catch (e) {
+      //print(e);
+    }
   }
 
   Future<void> adddataoldestlist() async {
-    setLoading(true);
-    oldestlist.addAll(await _restobj
-        .convertJsonToObject(api + order + latest + '$page $oldestpage'));
-    oldestpage++;
-    setLoading(false);
-    update();
+    try {
+      setLoading(true);
+      oldestlist.addAll(await _restobj
+          .convertJsonToObject(api + order + latest + '$page $oldestpage'));
+      oldestpage++;
+      setLoading(false);
+      update();
+    } catch (e) {
+      //print(e);
+    }
   }
 
   @override
@@ -43,9 +55,9 @@ class OldestController extends BaseControlle {
     }
   }
 
-  @override
-  void onClose() {
-    oldestcontroller.dispose();
-    super.onClose();
-  }
+  // @override
+  // void onClose() {
+  //   oldestcontroller.dispose();
+  //   super.onClose();
+  // }
 }

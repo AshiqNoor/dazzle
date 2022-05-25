@@ -2,7 +2,7 @@ import 'package:dazzle/view/utils/helper/color_helper.dart';
 import 'package:flutter/material.dart';
 
 class BottomIconButton extends StatelessWidget {
-  final Function onPressed;
+  final VoidCallback onPressed;
   final Color? color;
   final Widget icon;
 

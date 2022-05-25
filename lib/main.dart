@@ -1,15 +1,14 @@
-import 'package:dazzle/model/data.dart';
 import 'package:dazzle/model/urls.dart';
 import 'package:dazzle/model/wallpaper.dart';
 import 'package:dazzle/view/utils/constant/const.dart';
+import 'package:dazzle/view/utils/helper/color_helper.dart';
 import 'package:dazzle/view/widgets/base_view.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get_navigation/src/root/get_material_app.dart';
 import 'package:hive_flutter/adapters.dart';
 
-import 'model/result.dart';
-
 Future<void> main() async {
+  WidgetsFlutterBinding.ensureInitialized();
   await Hive.initFlutter();
   Hive.registerAdapter(UrlsAdapter());
   Hive.registerAdapter(WallpaperAdapter());
@@ -28,10 +27,10 @@ class MyApp extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return GetMaterialApp(
-      title: 'Dazzle App',
+      title: 'Dazzle Wallpaper',
       debugShowCheckedModeBanner: false,
       theme: ThemeData(
-        primarySwatch: Colors.purple,
+        primarySwatch: purpleCOLOR,
       ),
       home: const BaseView(),
     );

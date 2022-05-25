@@ -13,7 +13,8 @@ import 'package:get/get.dart';
 import 'package:loading_indicator/loading_indicator.dart';
 
 class HomeView extends StatelessWidget {
-  const HomeView({Key? key}) : super(key: key);
+  final bool isConnectivity;
+  const HomeView({Key? key, required this.isConnectivity}) : super(key: key);
 
   @override
   Widget build(BuildContext context) {
@@ -21,28 +22,16 @@ class HomeView extends StatelessWidget {
       length: 3,
       child: Scaffold(
         appBar: AppBar(
-          title: const Text(
-            wallpaperTitle,
-            style: h1,
-          ),
-          centerTitle: true,
-          backgroundColor: whiteCOLOR,
-          elevation: 1,
-          actions: [
-            IconButton(
-              icon: const Icon(Icons.search),
-              color: greyCOLOR,
-              onPressed: () {},
-            ),
-          ],
-          bottom: TabBar(
+          backgroundColor: topbotomColor,
+          elevation: elevationNo,
+          title: TabBar(
             indicatorColor: transparentCOLOR,
             labelColor: Theme.of(context).primaryColor,
             unselectedLabelColor: greyCOLOR,
             tabs: const [
-              Tab(child: Text(todayText, style: links)),
-              Tab(child: Text(popularText, style: links)),
-              Tab(child: Text(oOldestText, style: links)),
+              Tab(child: Text(todayText, style: tabText)),
+              Tab(child: Text(popularText, style: tabText)),
+              Tab(child: Text(oOldestText, style: tabText)),
             ],
           ),
         ),
@@ -53,45 +42,84 @@ class HomeView extends StatelessWidget {
             GetBuilder<TodayController>(
                 init: TodayController(),
                 builder: (c) {
-                  return c.state
-                      ? const Center(
-                          child: ProgIndicator(
-                          indicator: Indicator.ballSpinFadeLoader,
-                        ))
-                      : ShareGridWidget(
-                          wallpaper: c.todaylist,
-                          scrollController: c.todaycontroller,
-                          isLoading: c.isloading,
-                        );
+                  return RefreshIndicator(
+                      onRefresh: () async {
+                        await c.getListofToday();
+                      },
+                      child: isConnectivity
+                          ? c.state
+                              ? const Center(
+                                  child: ProgIndicator(
+                                  indicator: Indicator.ballSpinFadeLoader,
+                                ))
+                              : ShareGridWidget(
+                                  wallpaper: c.todaylist,
+                                  scrollController: c.todaycontroller,
+                                  isLoading: c.isloading,
+                                )
+                          : const Center(
+                              child: Text(
+                              "No Internet Connection",
+                              style: TextStyle(
+                                fontSize: 20,
+                                color: greyCOLOR,
+                              ),
+                            )));
                 }),
             // Popular
             GetBuilder<PopularController>(
                 init: PopularController(),
                 builder: (c) {
-                  return c.state
-                      ? const Center(
-                          child: ProgIndicator(
-                          indicator: Indicator.ballSpinFadeLoader,
-                        ))
-                      : ShareGridWidget(
-                          wallpaper: c.popularlist,
-                          scrollController: c.popularcontroller,
-                          isLoading: c.isloading,
-                        );
+                  return RefreshIndicator(
+                      onRefresh: () async {
+                        await c.getListofPopular();
+                      },
+                      child: isConnectivity
+                          ? c.state
+                              ? const Center(
+                                  child: ProgIndicator(
+                                  indicator: Indicator.ballSpinFadeLoader,
+                                ))
+                              : ShareGridWidget(
+                                  wallpaper: c.popularlist,
+                                  scrollController: c.popularcontroller,
+                                  isLoading: c.isloading,
+                                )
+                          : const Center(
+                              child: Text(
+                              "No Internet Connection",
+                              style: TextStyle(
+                                fontSize: 20,
+                                color: greyCOLOR,
+                              ),
+                            )));
                 }),
             // Oldest
             GetBuilder<OldestController>(
                 init: OldestController(),
                 builder: (c) {
-                  return c.state
-                      ? const Center(
-                          child: ProgIndicator(
-                          indicator: Indicator.ballSpinFadeLoader,
-                        ))
-                      : ShareGridWidget(
-                          wallpaper: c.oldestlist,
-                          scrollController: c.oldestcontroller,
-                          isLoading: c.isloading);
+                  return RefreshIndicator(
+                      onRefresh: () async {
+                        await c.getListofOldest();
+                      },
+                      child: isConnectivity
+                          ? c.state
+                              ? const Center(
+                                  child: ProgIndicator(
+                                  indicator: Indicator.ballSpinFadeLoader,
+                                ))
+                              : ShareGridWidget(
+                                  wallpaper: c.oldestlist,
+                                  scrollController: c.oldestcontroller,
+                                  isLoading: c.isloading)
+                          : const Center(
+                              child: Text(
+                              "No Internet Connection",
+                              style: TextStyle(
+                                fontSize: 20,
+                                color: greyCOLOR,
+                              ),
+                            )));
                 }),
           ],
         ),

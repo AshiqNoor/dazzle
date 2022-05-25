@@ -4,6 +4,7 @@ class BaseControlle extends GetxController {
   bool _state = false;
   bool get state => _state;
   bool isloading = false;
+  bool isConnectivity = false;
   void setstate(bool value) {
     _state = value;
     update();
@@ -15,8 +16,13 @@ class BaseControlle extends GetxController {
     update();
   }
 
-  setLoading(bool value) {
+  void setLoading(bool value) {
     isloading = value;
+    update();
+  }
+
+  void setConnectivity(bool value) {
+    isConnectivity = value;
     update();
   }
 }

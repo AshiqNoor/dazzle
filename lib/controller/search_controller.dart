@@ -11,28 +11,40 @@ class SearchController extends BaseControlle {
   List<Result> searchlist = [];
   int searchpage = 2;
   Future<void> getListofSearch() async {
-    setstate(true);
-    searchlist = await _restobj.convertsearchJsonToObject(
-        searchapi + '$page${1}' + '$query${textcontroller.text}');
-    setstate(false);
+    try {
+      setstate(true);
+      searchlist = await _restobj.convertsearchJsonToObject(
+          searchapi + '$page${1}' + '$query${textcontroller.text}');
+      setstate(false);
+    } catch (e) {
+      //print(e);
+    }
   }
 
   void loadmoredata() {
-    searchcontroller.addListener(() async {
-      if (searchcontroller.position.pixels ==
-          searchcontroller.position.maxScrollExtent) {
-        await adddatasearchlist();
-      }
-    });
+    try {
+      searchcontroller.addListener(() async {
+        if (searchcontroller.position.pixels ==
+            searchcontroller.position.maxScrollExtent) {
+          await adddatasearchlist();
+        }
+      });
+    } catch (e) {
+      //print(e);
+    }
   }
 
   Future<void> adddatasearchlist() async {
-    setLoading(true);
-    searchlist.addAll(await _restobj.convertsearchJsonToObject(
-        searchapi + '$page $searchpage' + '$query${textcontroller.text}'));
-    searchpage++;
-    setLoading(false);
-    update();
+    try {
+      setLoading(true);
+      searchlist.addAll(await _restobj.convertsearchJsonToObject(
+          searchapi + '$page $searchpage' + '$query${textcontroller.text}'));
+      searchpage++;
+      setLoading(false);
+      update();
+    } catch (e) {
+      //print(e);
+    }
   }
 
   @override
@@ -43,9 +55,9 @@ class SearchController extends BaseControlle {
     }
   }
 
-  @override
-  void onClose() {
-    searchcontroller.dispose();
-    super.onClose();
-  }
+  // @override
+  // void onClose() {
+  //   searchcontroller.dispose();
+  //   super.onClose();
+  // }
 }

@@ -10,28 +10,40 @@ class PopularController extends BaseControlle {
   List<Wallpaper> popularlist = [];
   int popularpage = 2;
   Future<void> getListofPopular() async {
-    setstate(true);
-    popularlist = await _restobj
-        .convertJsonToObject(api + order + popular + page + '${1}');
-    setstate(false);
+    try {
+      setstate(true);
+      popularlist = await _restobj
+          .convertJsonToObject(api + order + popular + page + '${1}');
+      setstate(false);
+    } catch (e) {
+      //print(e);
+    }
   }
 
   void loadmoredata() {
-    popularcontroller.addListener(() async {
-      if (popularcontroller.position.pixels ==
-          popularcontroller.position.maxScrollExtent) {
-        await adddatapopularlist();
-      }
-    });
+    try {
+      popularcontroller.addListener(() async {
+        if (popularcontroller.position.pixels ==
+            popularcontroller.position.maxScrollExtent) {
+          await adddatapopularlist();
+        }
+      });
+    } catch (e) {
+      //print(e);
+    }
   }
 
   Future<void> adddatapopularlist() async {
-    setLoading(true);
-    popularlist.addAll(await _restobj
-        .convertJsonToObject(api + order + latest + '$page $popularpage'));
-    popularpage++;
-    setLoading(false);
-    update();
+    try {
+      setLoading(true);
+      popularlist.addAll(await _restobj
+          .convertJsonToObject(api + order + latest + '$page $popularpage'));
+      popularpage++;
+      setLoading(false);
+      update();
+    } catch (e) {
+      //print(e);
+    }
   }
 
   @override
@@ -43,9 +55,9 @@ class PopularController extends BaseControlle {
     }
   }
 
-  @override
-  void onClose() {
-    popularcontroller.dispose();
-    super.onClose();
-  }
+  // @override
+  // void onClose() {
+  //   popularcontroller.dispose();
+  //   super.onClose();
+  // }
 }

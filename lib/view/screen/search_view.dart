@@ -9,8 +9,8 @@ import '../utils/share/progress_indicator.dart';
 import '../utils/share/share_grid_widget.dart';
 
 class SearchView extends StatelessWidget {
-  const SearchView({Key? key}) : super(key: key);
-
+  const SearchView({Key? key, required this.isConnectivity}) : super(key: key);
+  final bool isConnectivity;
   @override
   Widget build(BuildContext context) {
     double _width = MediaQuery.of(context).size.width;
@@ -20,8 +20,8 @@ class SearchView extends StatelessWidget {
           return Scaffold(
               appBar: AppBar(
                 centerTitle: true,
-                backgroundColor: whiteCOLOR,
-                elevation: 3,
+                backgroundColor: topbotomColor,
+                elevation: elevationNo,
                 title: SearchBar(
                   width: _width,
                   onSubmit: (String value) {
@@ -30,21 +30,34 @@ class SearchView extends StatelessWidget {
                   textcontroller: c.textcontroller,
                 ),
               ),
-              body: c.textcontroller.text.isEmpty
-                  ? Container()
-                  : c.searchlist.isEmpty
-                      ? const Center(child: Text(searchResult))
-                      : c.state
-                          ? const Center(
-                              child: ProgIndicator(
-                              indicator: Indicator.ballSpinFadeLoader,
-                            ))
-                          : ShareGridWidget(
-                              scrollController: c.searchcontroller,
-                              isLoading: c.isloading,
-                              wallpaper1: c.searchlist,
-                              isSearch: true,
-                            ));
+              body: RefreshIndicator(
+                  onRefresh: () async {
+                    await c.getListofSearch();
+                  },
+                  child: isConnectivity
+                      ? c.textcontroller.text.isEmpty
+                          ? Container()
+                          : c.searchlist.isEmpty
+                              ? const Center(child: Text(searchResult))
+                              : c.state
+                                  ? const Center(
+                                      child: ProgIndicator(
+                                      indicator: Indicator.ballSpinFadeLoader,
+                                    ))
+                                  : ShareGridWidget(
+                                      scrollController: c.searchcontroller,
+                                      isLoading: c.isloading,
+                                      wallpaper1: c.searchlist,
+                                      isSearch: true,
+                                    )
+                      : const Center(
+                          child: Text(
+                          "No Internet Connection",
+                          style: TextStyle(
+                            fontSize: 20,
+                            color: greyCOLOR,
+                          ),
+                        ))));
         });
   }
 }
