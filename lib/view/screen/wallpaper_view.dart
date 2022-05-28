@@ -1,9 +1,11 @@
 import 'dart:io';
 
+import 'package:dazzle/controller/ads/fullpage_ads_controller.dart';
 import 'package:dazzle/controller/favorite_controller.dart';
 import 'package:dazzle/controller/wallpaper_controller.dart';
 import 'package:dazzle/model/result.dart';
 import 'package:dazzle/model/wallpaper.dart';
+import 'package:dazzle/services/share_service.dart';
 import 'package:dazzle/view/widgets/bottom_icon.dart';
 import 'package:dazzle/view/widgets/bottom_sheet.dart';
 import 'package:flutter/material.dart';
@@ -77,15 +79,27 @@ class WallpaperView extends StatelessWidget {
                       mainAxisAlignment: MainAxisAlignment.spaceBetween,
                       children: [
                         //Back button
-                        BottomIconButton(
-                            onPressed: () {
-                              Get.back();
-                            },
-                            icon: const Icon(Icons.arrow_back_ios)),
+                        GetBuilder<FullPageAdsController>(
+                            init: FullPageAdsController(),
+                            builder: (c) {
+                              return BottomIconButton(
+                                  onPressed: () async {
+                                    if (c.isFullPageAdsLoaded) {
+                                      c.fullPageAd.show();
+                                    }
+                                    return Get.back();
+                                  },
+                                  icon: const Icon(Icons.arrow_back_ios));
+                            }),
                         //Option button
                         BottomIconButton(
-                            onPressed: () {},
-                            icon: const Icon(Icons.more_vert)),
+                          onPressed: () async {
+                            ShareImageService.shareImageFile(isSearch!
+                                ? wallpaper1!.urls.regular
+                                : wallpaper!.urls.regular);
+                          },
+                          icon: const Icon(Icons.share),
+                        ),
                       ],
                     )),
                 //Bottom
@@ -174,3 +188,19 @@ class WallpaperView extends StatelessWidget {
     );
   }
 }
+
+
+
+
+
+
+
+
+// builder: (c) {
+//         return WillPopScope(
+//           onWillPop: () async {
+//           if(c.isFullPageAdsLoaded){
+//            c.fullPageAd.show();
+//            } return true;
+          
+//           }

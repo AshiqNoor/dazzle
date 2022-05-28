@@ -14,6 +14,7 @@ class ConnectivityController extends BaseControlle {
     switch (connectivityResult) {
       case ConnectivityResult.mobile:
         setConnectivity(true);
+        update();
         Get.showSnackbar(
           const GetSnackBar(
             backgroundGradient: LinearGradient(
@@ -26,6 +27,7 @@ class ConnectivityController extends BaseControlle {
         break;
       case ConnectivityResult.wifi:
         setConnectivity(true);
+        update();
         Get.showSnackbar(
           const GetSnackBar(
             backgroundGradient: LinearGradient(
@@ -38,6 +40,7 @@ class ConnectivityController extends BaseControlle {
         break;
       case ConnectivityResult.none:
         setConnectivity(false);
+        update();
         Get.showSnackbar(
           const GetSnackBar(
             backgroundGradient: LinearGradient(

@@ -51,3 +51,5 @@ const wifiConnected = "Wifi Connected";
 const noConnection = "No Internet Connection";
 const double elevationNo = 2;
 const int snakbarDuration = 2;
+const int nativeAdsCount = 5;
+const double nativeAdsHEIGHT = 170;

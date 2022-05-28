@@ -20,71 +20,93 @@ class BaseView extends StatelessWidget {
       builder: (c) {
         return Scaffold(
           body: getWidgetByIndex(c.currentIndex, c.isConnectivity),
-          bottomNavigationBar: Container(
-            decoration: BoxDecoration(
-              color: topbotomColor,
-              boxShadow: [
-                BoxShadow(
-                  blurRadius: 20,
-                  color: blackCOLOR.withOpacity(.1),
-                )
-              ],
-            ),
-            child: SafeArea(
-              child: Padding(
-                  padding:
-                      const EdgeInsets.symmetric(horizontal: 15.0, vertical: 8),
-                  child: GNav(
-                    selectedIndex: c.currentIndex,
-                    onTabChange: (val) {
-                      c.setCurrentIndex(val);
-                    },
-                    //tabBorderRadius: 20,
-                    rippleColor: lightBlueCOLOR,
-                    hoverColor: blueCOLOR,
-                    gap: 8,
-                    activeColor: whiteCOLOR,
-                    iconSize: 25,
-                    padding:
-                        const EdgeInsets.symmetric(horizontal: 12, vertical: 8),
-                    duration: const Duration(milliseconds: 400),
-                    color: Theme.of(context).primaryColor,
-                    tabs: const [
-                      GButton(
-                          icon: Icons.home_outlined,
-                          text: homeText,
+          bottomNavigationBar: Stack(children: [
+            Container(
+              decoration: BoxDecoration(
+                color: navBarCOLOR,
+                boxShadow: [
+                  BoxShadow(
+                    blurRadius: 20,
+                    color: blackCOLOR.withOpacity(.1),
+                  )
+                ],
+              ),
+              child: SafeArea(
+                child: Padding(
+                    padding: const EdgeInsets.symmetric(
+                        horizontal: 15.0, vertical: 8),
+                    child: GNav(
+                      selectedIndex: c.currentIndex,
+                      onTabChange: (val) {
+                        c.setCurrentIndex(val);
+                      },
+                      //tabBorderRadius: 20,
+                      rippleColor: lightBlueCOLOR,
+                      hoverColor: blueCOLOR,
+                      gap: 8,
+                      activeColor: whiteCOLOR,
+                      iconSize: 25,
+                      padding: const EdgeInsets.symmetric(
+                          horizontal: 12, vertical: 8),
+                      duration: const Duration(milliseconds: 400),
+                      color: Theme.of(context).primaryColor,
+                      tabs: const [
+                        GButton(
+                            icon: Icons.home_outlined,
+                            text: homeText,
+                            textStyle: navText,
+                            backgroundGradient: LinearGradient(
+                              colors: [lightCyanCOLOR, lightBlueCOLOR],
+                            )),
+                        GButton(
+                          icon: Icons.download_outlined,
+                          text: downloadText,
                           textStyle: navText,
                           backgroundGradient: LinearGradient(
                             colors: [lightCyanCOLOR, lightBlueCOLOR],
-                          )),
-                      GButton(
-                        icon: Icons.download_outlined,
-                        text: downloadText,
-                        textStyle: navText,
-                        backgroundGradient: LinearGradient(
-                          colors: [lightCyanCOLOR, lightBlueCOLOR],
+                          ),
                         ),
-                      ),
-                      GButton(
-                        icon: Icons.favorite_outline,
-                        text: favoriteText,
-                        textStyle: navText,
-                        backgroundGradient: LinearGradient(
-                          colors: [lightCyanCOLOR, lightBlueCOLOR],
+                        GButton(
+                          icon: Icons.favorite_outline,
+                          text: favoriteText,
+                          textStyle: navText,
+                          backgroundGradient: LinearGradient(
+                            colors: [lightCyanCOLOR, lightBlueCOLOR],
+                          ),
                         ),
-                      ),
-                      GButton(
-                        icon: Icons.search_outlined,
-                        text: searchText,
-                        textStyle: navText,
-                        backgroundGradient: LinearGradient(
-                          colors: [lightCyanCOLOR, lightBlueCOLOR],
+                        GButton(
+                          icon: Icons.search_outlined,
+                          text: searchText,
+                          textStyle: navText,
+                          backgroundGradient: LinearGradient(
+                            colors: [lightCyanCOLOR, lightBlueCOLOR],
+                          ),
                         ),
-                      ),
-                    ],
-                  )),
+                      ],
+                    )),
+              ),
             ),
-          ),
+            // GetBuilder<AdsController>(
+            //   init: AdsController(),
+            //   // initState: (_) {},
+            //   builder: (c) {
+            //     if (c.isHomepageAdsLoaded) {
+            //       return Container(
+            //         height: 50,
+            //         margin: const EdgeInsets.only(top: 57),
+            //         color: redCOLOR.withOpacity(0.5),
+            //         child: AdWidget(
+            //           ad: c.homepageBanner,
+            //         ),
+            //       );
+            //     } else {
+            //       return Container(
+            //         height: 0,
+            //       );
+            //     }
+            //   },
+            // ),
+          ]),
 
           //*********old navigation bar*************
           // BottomNavigationBar(

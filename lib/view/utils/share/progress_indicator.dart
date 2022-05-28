@@ -22,7 +22,7 @@ class ProgIndicator extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Padding(
-      padding: const EdgeInsets.only(bottom: 7),
+      padding: const EdgeInsets.only(bottom: 57),
       child: CircleAvatar(
         backgroundColor: transparentCOLOR,
         child: LoadingIndicator(

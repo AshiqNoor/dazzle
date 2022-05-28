@@ -1,5 +1,7 @@
 import 'package:dazzle/controller/download_controller.dart';
 import 'package:dazzle/view/utils/constant/const.dart';
+import 'package:dazzle/view/utils/helper/color_helper.dart';
+import 'package:flutter/material.dart';
 import 'package:flutter_cache_manager/file.dart';
 import 'package:flutter_cache_manager/flutter_cache_manager.dart';
 import 'package:flutter_wallpaper_manager/flutter_wallpaper_manager.dart';
@@ -13,6 +15,9 @@ class WallpaperController extends DownloadController {
     getimagepath(url: url, path: file.path);
     Get.showSnackbar(
       const GetSnackBar(
+        backgroundGradient: LinearGradient(
+          colors: [lightCyanCOLOR, lightBlueCOLOR],
+        ),
         title: successMessage,
         message: downloadedMessage,
         duration: Duration(seconds: snakbarDuration),
@@ -69,6 +74,9 @@ class WallpaperController extends DownloadController {
           path, WallpaperManager.HOME_SCREEN);
       Get.showSnackbar(
         const GetSnackBar(
+          backgroundGradient: LinearGradient(
+            colors: [lightCyanCOLOR, lightBlueCOLOR],
+          ),
           title: doneMessage,
           message: homeMessage,
           duration: Duration(seconds: snakbarDuration),
@@ -86,6 +94,9 @@ class WallpaperController extends DownloadController {
           path, WallpaperManager.LOCK_SCREEN);
       Get.showSnackbar(
         const GetSnackBar(
+          backgroundGradient: LinearGradient(
+            colors: [lightCyanCOLOR, lightBlueCOLOR],
+          ),
           title: doneMessage,
           message: lockMessage,
           duration: Duration(seconds: snakbarDuration),
@@ -103,6 +114,9 @@ class WallpaperController extends DownloadController {
           path, WallpaperManager.BOTH_SCREEN);
       Get.showSnackbar(
         const GetSnackBar(
+          backgroundGradient: LinearGradient(
+            colors: [lightCyanCOLOR, lightBlueCOLOR],
+          ),
           title: doneMessage,
           message: bothMessage,
           duration: Duration(seconds: snakbarDuration),

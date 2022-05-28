@@ -79,7 +79,7 @@ class SetAsButton extends StatelessWidget {
                   ),
                   height: Get.height * 0.32,
                   decoration: const BoxDecoration(
-                    color: whiteCOLOR,
+                    color: bottomSheetCOLOR,
                     borderRadius: BorderRadius.only(
                       topLeft: Radius.circular(10),
                       topRight: Radius.circular(10),

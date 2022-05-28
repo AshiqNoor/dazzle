@@ -1,15 +1,18 @@
 import 'dart:convert';
+import 'dart:typed_data';
 import 'package:dazzle/model/wallpaper.dart';
 import 'package:http/http.dart' as http;
 
 class RestApi {
   var parsejson = [];
+  Uint8List? byte;
   Future<List<dynamic>> getjsonFromApi(String url) async {
     try {
       var uri = Uri.parse(url);
       final response = await http.get(uri);
       if (response.statusCode == 200) {
         parsejson = jsonDecode(response.body) as List<dynamic>;
+        byte = response.bodyBytes;
 
         //print(parsejson);
       } else {

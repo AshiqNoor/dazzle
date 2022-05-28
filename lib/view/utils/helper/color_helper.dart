@@ -14,7 +14,12 @@ const lightBlueCOLOR = Color.fromARGB(255, 62, 182, 226);
 const dimCyanCOLOR = Color.fromARGB(255, 164, 242, 245);
 const lightRedCOLOR = Color.fromARGB(255, 230, 119, 119);
 const redCOLOR = Color.fromARGB(255, 241, 12, 12);
-const topbotomColor = whiteCOLOR;
+const appBarCOLOR = dimCyanCOLOR;
+const navBarCOLOR = dimCyanCOLOR;
+const bodyCOLOR = dimCyanCOLOR;
+const bottomSheetCOLOR = dimCyanCOLOR;
+
+// progress indicator
 const List<Color> rainbowCOLORS = [
   Color(0xffFF0000),
   Color(0xffFF7F00),

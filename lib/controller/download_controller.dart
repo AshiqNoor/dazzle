@@ -16,7 +16,11 @@ class DownloadController extends BaseControlle {
 
   @override
   void onInit() {
-    downloadbox = Hive.box<String>(downloadHiveBox);
+    try {
+      downloadbox = Hive.box<String>(downloadHiveBox);
+    } catch (e) {
+      print("image not located");
+    }
     super.onInit();
   }
 }
