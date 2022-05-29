@@ -30,6 +30,7 @@ const setScreenAs = "Set wallpaper as :";
 const homeScreen = "Home Screen";
 const lockScreen = "Lock Screen";
 const bothScreen = "Home & Lock Screen";
+const shareTEXT = 'Share';
 const setAs = "SET AS";
 const successMessage = "Download Success";
 const downloadedMessage = "Image Downloaded";

@@ -24,7 +24,7 @@ class DownloadView extends StatelessWidget {
       appBar: AppBar(
         title: const Text(
           downloadTitle,
-          style: title1,
+          style: titleText,
         ),
         // bottomOpacity: 5,
         centerTitle: true,
@@ -85,7 +85,7 @@ class DownloadView extends StatelessWidget {
                                                 onTap: () {
                                                   Get.to(() => WallpaperView(
                                                         isdownload: true,
-                                                        wallpaper: Wallpaper(
+                                                        fromhome: Wallpaper(
                                                           description: '',
                                                           altDescription: '',
                                                           urls: Urls(

@@ -19,7 +19,7 @@ class DownloadController extends BaseControlle {
     try {
       downloadbox = Hive.box<String>(downloadHiveBox);
     } catch (e) {
-      print("image not located");
+      // print("image not located");
     }
     super.onInit();
   }

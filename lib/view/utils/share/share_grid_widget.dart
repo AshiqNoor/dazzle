@@ -10,17 +10,17 @@ import 'package:get/get.dart';
 import 'package:google_mobile_ads/google_mobile_ads.dart';
 
 class ShareGridWidget extends StatelessWidget {
-  final List<Wallpaper>? wallpaper;
-  final List<Result>? wallpaper1;
+  final List<Wallpaper>? fromhome;
+  final List<Result>? fromsearch;
   final ScrollController scrollController;
   final bool isLoading;
   final bool? isSearch;
   const ShareGridWidget({
     Key? key,
-    this.wallpaper,
+    this.fromhome,
     required this.scrollController,
     required this.isLoading,
-    this.wallpaper1,
+    this.fromsearch,
     this.isSearch = false,
   }) : super(key: key);
 
@@ -43,11 +43,11 @@ class ShareGridWidget extends StatelessWidget {
                     StaggeredTile.count(2, i.isOdd ? 2 : 3),
                 mainAxisSpacing: 8,
                 crossAxisSpacing: 8,
-                itemCount: isSearch! ? wallpaper1!.length : wallpaper!.length,
+                itemCount: isSearch! ? fromsearch!.length : fromhome!.length,
                 itemBuilder: (context, index) {
                   String imgpath = isSearch!
-                      ? wallpaper1![index].urls.regular
-                      : wallpaper![index].urls.regular;
+                      ? fromsearch![index].urls.regular
+                      : fromhome![index].urls.regular;
                   //Native ads
                   if (c.isGridViewAdsLoaded && index == nativeAdsCount) {
                     return Container(
@@ -63,9 +63,9 @@ class ShareGridWidget extends StatelessWidget {
                       child: GestureDetector(
                         onTap: () {
                           Get.to(() => WallpaperView(
-                                wallpaper1:
-                                    isSearch! ? wallpaper1![index] : null,
-                                wallpaper: isSearch! ? null : wallpaper![index],
+                                fromsearch:
+                                    isSearch! ? fromsearch![index] : null,
+                                fromhome: isSearch! ? null : fromhome![index],
                                 isdownload: false,
                                 isSearch: isSearch!,
                               ));

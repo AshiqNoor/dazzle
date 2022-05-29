@@ -17,14 +17,13 @@ import 'package:hive_flutter/adapters.dart';
 class FavView extends StatelessWidget {
   const FavView({Key? key, required this.isConnectivity}) : super(key: key);
   final bool isConnectivity;
-
   @override
   Widget build(BuildContext context) {
     return Scaffold(
         appBar: AppBar(
           title: const Text(
             favoriteTitle,
-            style: title1,
+            style: titleText,
           ),
           centerTitle: true,
           backgroundColor: appBarCOLOR,
@@ -86,7 +85,7 @@ class FavView extends StatelessWidget {
                                                         onTap: () {
                                                           Get.to(() =>
                                                               WallpaperView(
-                                                                wallpaper:
+                                                                fromhome:
                                                                     wallpaper!,
                                                                 isdownload:
                                                                     false,

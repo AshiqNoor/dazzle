@@ -62,7 +62,7 @@ class HomeView extends StatelessWidget {
                                                   Indicator.ballSpinFadeLoader,
                                             ))
                                           : ShareGridWidget(
-                                              wallpaper: c.todaylist,
+                                              fromhome: c.todaylist,
                                               scrollController:
                                                   c.todaycontroller,
                                               isLoading: c.isloading,
@@ -92,7 +92,7 @@ class HomeView extends StatelessWidget {
                                                   Indicator.ballSpinFadeLoader,
                                             ))
                                           : ShareGridWidget(
-                                              wallpaper: c.popularlist,
+                                              fromhome: c.popularlist,
                                               scrollController:
                                                   c.popularcontroller,
                                               isLoading: c.isloading,
@@ -122,7 +122,7 @@ class HomeView extends StatelessWidget {
                                                   Indicator.ballSpinFadeLoader,
                                             ))
                                           : ShareGridWidget(
-                                              wallpaper: c.oldestlist,
+                                              fromhome: c.oldestlist,
                                               scrollController:
                                                   c.oldestcontroller,
                                               isLoading: c.isloading)

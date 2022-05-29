@@ -9,6 +9,7 @@ const whiteCOLOR = Color(0xffFFFFFF);
 const greyCOLOR = Color(0xffC3C8D6);
 const blackgreyCOLOR = Color(0xff8E8C97);
 const greenCOLOR = Color.fromARGB(255, 94, 255, 1);
+const lightblue1COLOR = Color.fromARGB(255, 104, 200, 245);
 const lightCyanCOLOR = Color.fromARGB(255, 148, 231, 225);
 const lightBlueCOLOR = Color.fromARGB(255, 62, 182, 226);
 const dimCyanCOLOR = Color.fromARGB(255, 164, 242, 245);

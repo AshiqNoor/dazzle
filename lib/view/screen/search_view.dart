@@ -59,7 +59,7 @@ class SearchView extends StatelessWidget {
                                                   scrollController:
                                                       c.searchcontroller,
                                                   isLoading: c.isloading,
-                                                  wallpaper1: c.searchlist,
+                                                  fromsearch: c.searchlist,
                                                   isSearch: true,
                                                 )
                                   : const Center(

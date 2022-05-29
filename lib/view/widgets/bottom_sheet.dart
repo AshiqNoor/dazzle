@@ -11,26 +11,20 @@ import 'package:get/get_navigation/get_navigation.dart';
 import '../../model/result.dart';
 
 class SetAsButton extends StatelessWidget {
-  final Wallpaper? wallpaper;
-  final Result? wallpaper1;
+  final Wallpaper? fromhome;
+  final Result? fromsearch;
   final bool? isSearch;
   final bool isdownload;
   final WallpaperController wallpaperController;
-  SetAsButton({
+  const SetAsButton({
     Key? key,
-    this.wallpaper,
+    this.fromhome,
     required this.wallpaperController,
     required this.isdownload,
     this.isSearch,
-    this.wallpaper1,
+    this.fromsearch,
   }) : super(key: key);
 
-  final List<BottomList> bottomSheetName = [
-    BottomList(name: setScreenAs, icon: const Icon(Icons.cancel_outlined)),
-    BottomList(name: homeScreen, icon: const Icon(Icons.home_filled)),
-    BottomList(name: lockScreen, icon: const Icon(Icons.lock_open)),
-    BottomList(name: bothScreen, icon: const Icon(Icons.screen_lock_portrait)),
-  ];
   @override
   Widget build(BuildContext context) {
     return GestureDetector(
@@ -44,7 +38,7 @@ class SetAsButton extends StatelessWidget {
         child: const Center(
           child: Text(
             setAs,
-            style: buttons,
+            style: buttonsText,
           ),
         ),
       ),
@@ -54,23 +48,23 @@ class SetAsButton extends StatelessWidget {
             context: context,
             builder: (context) => Container(
                   child: ListView(
-                    children: bottomSheetName.map((val) {
+                    children: BottomList.bottomSheetName.map((val) {
                       return ListTile(
                         trailing: val.name == setScreenAs ? val.icon : null,
                         leading: val.name == setScreenAs ? null : val.icon,
                         title: Text(
                           val.name,
-                          style: h1,
+                          style: bottomText,
                         ),
                         onTap: () {
                           wallpaperController.setScreen(
                               url: isSearch!
-                                  ? wallpaper1!.urls.regular
-                                  : wallpaper!.urls.regular,
+                                  ? fromsearch!.urls.regular
+                                  : fromhome!.urls.regular,
                               name: val.name,
                               imgpath: isSearch!
-                                  ? wallpaper1!.urls.regular
-                                  : wallpaper!.urls.regular,
+                                  ? fromsearch!.urls.regular
+                                  : fromhome!.urls.regular,
                               download: isdownload);
                           Get.back();
                         },
