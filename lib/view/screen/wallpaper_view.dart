@@ -92,7 +92,7 @@ class WallpaperView extends StatelessWidget {
                                 icon: const Icon(Icons.arrow_back_ios),
                               ),
 
-                              //Option button
+                              //Share button
                               GetBuilder<WallpaperController>(
                                 init: WallpaperController(),
                                 builder: (cc) {
@@ -107,23 +107,28 @@ class WallpaperView extends StatelessWidget {
                                       return PouUpList.itemname.map((item) {
                                         return PopupMenuItem(
                                             value: item,
-                                            child: Column(
-                                              crossAxisAlignment:
-                                                  CrossAxisAlignment.start,
-                                              children: [
-                                                Row(
-                                                  children: [
-                                                    item.icon as Widget,
-                                                    const SizedBox(
-                                                      width: 5,
-                                                    ),
-                                                    Text(
-                                                      item.name,
-                                                      style: popupText,
-                                                    ),
-                                                  ],
-                                                ),
-                                              ],
+                                            child: ConstrainedBox(
+                                              constraints: const BoxConstraints(
+                                                minWidth: double.infinity,
+                                              ),
+                                              child: Column(
+                                                crossAxisAlignment:
+                                                    CrossAxisAlignment.start,
+                                                children: [
+                                                  Row(
+                                                    children: [
+                                                      item.icon as Widget,
+                                                      const SizedBox(
+                                                        width: 5,
+                                                      ),
+                                                      Text(
+                                                        item.name,
+                                                        style: popupText,
+                                                      ),
+                                                    ],
+                                                  ),
+                                                ],
+                                              ),
                                             ));
                                       }).toList();
                                     },

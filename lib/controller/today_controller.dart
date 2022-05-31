@@ -55,9 +55,9 @@ class TodayController extends BaseControlle {
     }
   }
 
-  // @override
-  // void onClose() {
-  //   todaycontroller.dispose();
-  //   super.onClose();
-  // }
+  @override
+  void onClose() {
+    todaycontroller.dispose();
+    super.onClose();
+  }
 }

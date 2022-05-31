@@ -55,9 +55,9 @@ class OldestController extends BaseControlle {
     }
   }
 
-  // @override
-  // void onClose() {
-  //   oldestcontroller.dispose();
-  //   super.onClose();
-  // }
+  @override
+  void onClose() {
+    oldestcontroller.dispose();
+    super.onClose();
+  }
 }

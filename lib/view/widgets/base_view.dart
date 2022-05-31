@@ -86,26 +86,6 @@ class BaseView extends StatelessWidget {
                     )),
               ),
             ),
-            // GetBuilder<AdsController>(
-            //   init: AdsController(),
-            //   // initState: (_) {},
-            //   builder: (c) {
-            //     if (c.isHomepageAdsLoaded) {
-            //       return Container(
-            //         height: 50,
-            //         margin: const EdgeInsets.only(top: 57),
-            //         color: redCOLOR.withOpacity(0.5),
-            //         child: AdWidget(
-            //           ad: c.homepageBanner,
-            //         ),
-            //       );
-            //     } else {
-            //       return Container(
-            //         height: 0,
-            //       );
-            //     }
-            //   },
-            // ),
           ]),
 
           //*********old navigation bar*************

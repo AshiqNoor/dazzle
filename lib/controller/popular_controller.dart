@@ -55,9 +55,9 @@ class PopularController extends BaseControlle {
     }
   }
 
-  // @override
-  // void onClose() {
-  //   popularcontroller.dispose();
-  //   super.onClose();
-  // }
+  @override
+  void onClose() {
+    popularcontroller.dispose();
+    super.onClose();
+  }
 }

@@ -5,6 +5,7 @@ class BaseControlle extends GetxController {
   bool get state => _state;
   bool isloading = false;
   bool isConnectivity = false;
+  String tabname = "";
   void setstate(bool value) {
     _state = value;
     update();

@@ -1,18 +1,15 @@
 import 'package:dazzle/controller/ads/home_ads_controller.dart';
-import 'package:dazzle/controller/today_controller.dart';
-import 'package:dazzle/controller/oldest_controller.dart';
-import 'package:dazzle/controller/popular_controller.dart';
 import 'package:dazzle/view/utils/constant/const.dart';
 
 import 'package:dazzle/view/utils/helper/color_helper.dart';
 import 'package:dazzle/view/utils/helper/style_helper.dart';
-import 'package:dazzle/view/utils/share/progress_indicator.dart';
+import 'package:dazzle/view/widgets/oldesttab.dart';
+import 'package:dazzle/view/widgets/populartab.dart';
+import 'package:dazzle/view/widgets/todaytab.dart';
 
 import 'package:flutter/material.dart';
-import 'package:dazzle/view/utils/share/share_grid_widget.dart';
 import 'package:get/get.dart';
 import 'package:google_mobile_ads/google_mobile_ads.dart';
-import 'package:loading_indicator/loading_indicator.dart';
 
 class HomeView extends StatelessWidget {
   final bool isConnectivity;
@@ -47,94 +44,11 @@ class HomeView extends StatelessWidget {
                       physics: const BouncingScrollPhysics(),
                       children: [
                         // Today
-                        GetBuilder<TodayController>(
-                            init: TodayController(),
-                            builder: (c) {
-                              return RefreshIndicator(
-                                  onRefresh: () async {
-                                    await c.getListofToday();
-                                  },
-                                  child: isConnectivity
-                                      ? c.state
-                                          ? const Center(
-                                              child: ProgIndicator(
-                                              indicator:
-                                                  Indicator.ballSpinFadeLoader,
-                                            ))
-                                          : ShareGridWidget(
-                                              fromhome: c.todaylist,
-                                              scrollController:
-                                                  c.todaycontroller,
-                                              isLoading: c.isloading,
-                                            )
-                                      : const Center(
-                                          child: Text(
-                                          "No Internet Connection",
-                                          style: TextStyle(
-                                            fontSize: 20,
-                                            color: greyCOLOR,
-                                          ),
-                                        )));
-                            }),
+                        TodayTab(isConnectivity: isConnectivity),
                         // Popular
-                        GetBuilder<PopularController>(
-                            init: PopularController(),
-                            builder: (c) {
-                              return RefreshIndicator(
-                                  onRefresh: () async {
-                                    await c.getListofPopular();
-                                  },
-                                  child: isConnectivity
-                                      ? c.state
-                                          ? const Center(
-                                              child: ProgIndicator(
-                                              indicator:
-                                                  Indicator.ballSpinFadeLoader,
-                                            ))
-                                          : ShareGridWidget(
-                                              fromhome: c.popularlist,
-                                              scrollController:
-                                                  c.popularcontroller,
-                                              isLoading: c.isloading,
-                                            )
-                                      : const Center(
-                                          child: Text(
-                                          "No Internet Connection",
-                                          style: TextStyle(
-                                            fontSize: 20,
-                                            color: greyCOLOR,
-                                          ),
-                                        )));
-                            }),
+                        PopularTab(isConnectivity: isConnectivity),
                         // Oldest
-                        GetBuilder<OldestController>(
-                            init: OldestController(),
-                            builder: (c) {
-                              return RefreshIndicator(
-                                  onRefresh: () async {
-                                    await c.getListofOldest();
-                                  },
-                                  child: isConnectivity
-                                      ? c.state
-                                          ? const Center(
-                                              child: ProgIndicator(
-                                              indicator:
-                                                  Indicator.ballSpinFadeLoader,
-                                            ))
-                                          : ShareGridWidget(
-                                              fromhome: c.oldestlist,
-                                              scrollController:
-                                                  c.oldestcontroller,
-                                              isLoading: c.isloading)
-                                      : const Center(
-                                          child: Text(
-                                          "No Internet Connection",
-                                          style: TextStyle(
-                                            fontSize: 20,
-                                            color: greyCOLOR,
-                                          ),
-                                        )));
-                            }),
+                        OldestTab(isConnectivity: isConnectivity),
                       ],
                     ),
                   ),

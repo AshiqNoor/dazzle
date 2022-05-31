@@ -64,7 +64,7 @@ class SearchView extends StatelessWidget {
                                                 )
                                   : const Center(
                                       child: Text(
-                                      "No Internet Connection",
+                                      noConnection,
                                       style: TextStyle(
                                         fontSize: 20,
                                         color: greyCOLOR,
