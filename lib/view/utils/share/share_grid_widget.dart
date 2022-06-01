@@ -37,7 +37,7 @@ class ShareGridWidget extends StatelessWidget {
             children: [
               StaggeredGridView.countBuilder(
                 controller: scrollController,
-                physics: const ClampingScrollPhysics(),
+                physics: const BouncingScrollPhysics(),
                 crossAxisCount: 4,
                 staggeredTileBuilder: (i) =>
                     StaggeredTile.count(2, i.isOdd ? 2 : 3),

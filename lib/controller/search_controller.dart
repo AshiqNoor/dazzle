@@ -55,9 +55,9 @@ class SearchController extends BaseControlle {
     }
   }
 
-  // @override
-  // void onClose() {
-  //   searchcontroller.dispose();
-  //   super.onClose();
-  // }
+  @override
+  void onClose() {
+    searchcontroller.dispose();
+    super.onClose();
+  }
 }
