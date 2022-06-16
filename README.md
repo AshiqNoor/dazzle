@@ -1,11 +1,7 @@
-
-<img  src="log/git_badges/built-with-love.svg"  height="28px"/>&nbsp;&nbsp;
-
-<img  src="log/git_badges/flutter-dart.svg"  height="28px"  />&nbsp;&nbsp;
-
-<a  href="https://choosealicense.com/licenses/mit/"  target="_blank"><img  src="log/git_badges/license-MIT.svg"  height="28px"  /></a>&nbsp;&nbsp;
-
-<img  src="log/git_badges/dart-null_safety-blue.svg"  height="28px"/>
+<img src="log/git_badges/built-with-love.svg" height="28px"/>&nbsp;&nbsp;
+<img src="log/git_badges/flutter-dart.svg" height="28px" />&nbsp;&nbsp;
+<a href="https://choosealicense.com/licenses/mit/" target="_blank"><img src="log/git_badges/license-MIT.svg" height="28px" /></a>&nbsp;&nbsp;
+<img src="log/git_badges/dart-null_safety-blue.svg" height="28px"/>
 
   
 
