@@ -29,11 +29,18 @@ Enjoy a new wallpaper every day! from the best source of photography: unsplash.c
 ◉ Fast loading<br>
 </p>
 
-Note: It's an open-source project; hence anyone can use this code according to the [MIT License](https://choosealicense.com/licenses/mit/) rules & regulations.
+## YouTube
+
+I have published it in PlayStore, you can check it out [Dazzle Wallpaper](https://play.google.com/store/apps/details?id=com.darkshadow.dazzle) 
+
+<p align="center">
+  <img align="left" src="log/dazzle.gif" height="550"></img>
+</p>
+
+
+Note: It's an open-source project. Anyone can use this code according to the [MIT License](https://choosealicense.com/licenses/mit/) rules & regulations.
 
 ## Packages used:
-
-<img align="left" src="log/dazzle.gif" height="550"></img>
 
 // For using Home Screen, Lock Screen and Both Screen mode<br>
 [flutter_wallpaper_manager: ^0.0.3](https://pub.dev/packages/flutter_wallpaper_manager)<br>
@@ -56,11 +63,6 @@ Note: It's an open-source project; hence anyone can use this code according to t
 // For making http requests<br>
 [http: ^0.13.4](https://pub.dev/packages/http)<br>
 
-<br>
-<br>
-<br>
-<br>
-<br>
 
 # Installation
 
@@ -78,6 +80,10 @@ $ git clone https://github.com/AshiqNoor/dazzle.git
 $ flutter pub get
 $ flutter run
 ```
+
+## Feedback
+
+If you have any feedback, please reach out to me at ashiq.annoor0@gmail.com
 
 
 Note: To run this application on your system, you will need [git](https://git-scm.com/) and [flutter](https://docs.flutter.dev/get-started/install) environment already installed.
