@@ -33,7 +33,7 @@ Note: It's an open-source project; hence anyone can use this code according to t
 
 ## Packages used:
 
-<img align="left" src="log/dazzle.gif" height="550"></img>
+
 
 // For using Home Screen, Lock Screen and Both Screen mode<br>
 [flutter_wallpaper_manager: ^0.0.3](https://pub.dev/packages/flutter_wallpaper_manager)<br>
@@ -55,6 +55,8 @@ Note: It's an open-source project; hence anyone can use this code according to t
 [connectivity_plus: ^2.3.0](https://pub.dev/packages/connectivity_plus)
 // For making http requests<br>
 [http: ^0.13.4](https://pub.dev/packages/http)<br>
+
+<img align="left" src="log/dazzle.gif" height="550"></img>
 
 <br>
 <br>
